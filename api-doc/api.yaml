@@ -6,16 +6,22 @@ info:
 
     This api exposes routes of a construction and renovation project management application.
 
-    - Should be possible acess restricted areas in `/client` routes.
+    - Should be possible acess restricted areas in `/client` route.
 
-    - Should be possible acess adm areas in `/admin` routes.
+    - Should be possible acess adm areas in `/dashboard`, `/professionals` and `/projects` routes.
 
-    - Should be possible request new budgets in `/budget` routes.
+    - Should be possible request new budgets in `/budget` route.
+    
+    - Should be possible open tickets in `/ticket` route.
+    
+    - Should be possible send a curriculum in `/curriculum` route.
 
   version: 1.0.1
   contact:
     email: 34s0ft@34s0ft.com
 servers:
+  - url: https://virtserver.swaggerhub.com/34s0ft/cv_reformas/1.0.1
+    description: Mock static api server for testing
   - url: http://api.cvreformas.com/v1
     description:  Main server (production) server
   - url: http://staging-api.cvreformas.com
@@ -26,6 +32,21 @@ servers:
 #   - http
 #   - https
 paths:
+  /:
+    get:
+      summary: Home Page
+      responses:
+        '200':
+          description: A welcome mesage
+          content:
+            plain-text:
+              schema:
+                type: object
+                properties:
+                  msg: 
+                    type: string
+                example:      
+                  msg: Welcome!
   /session:
     post:
       summary: Create a session
@@ -363,6 +384,25 @@ paths:
       responses:
         '200':
           description: Curriculum updated
+  /finishedBudgets:
+    get:
+      summary: List finished budgets by page (5 per request)
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+          required: true
+          description: The number of pages
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FinishedBudgets'
+          description: Clients list
+        "404":
+          $ref: '#/components/responses/NotFoundErros'
   /budget:
     get:
       summary: List budgets by page (5 per request)
@@ -660,31 +700,497 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Professionals'
+                  $ref: "#/components/schemas/Professional"
+          description: Professional list
+        "404":
+          $ref: "#/components/responses/NotFoundErros"
+    post:
+      summary: Add a new professionals
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Professional"
+      responses:
+        "200":
+          description: Professional added
+  /professionals/{id}:
+    put:
+      summary: Modify the status of a professional
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+          description: the id of professional to be modify
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Professional"
+      responses:
+        "200":
+          description: Professional updated
+    patch:
+      summary: Modify a current Budget
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+          description: the id of budget to be modify
+      requestBody:
+        description: " Possible status
+
+        - hired
+
+        - dismiss
+
+        - standby 
+        
+        - busy"
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+              example:
+                status: "hired"
+      responses:
+        "200":
+          description: Budget updated
+    delete:
+      summary: Delete a professional from database
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+          description: the id of professional to be deleted
+      responses:
+        "200":
+          description: Professional deleted
+
+
+  /pending:
+    get:
+      summary: List pending budgets by page (5 per request)
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+          required: true
+          description: The number of pages
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Pending"
           description: Clients list
         "404":
-          $ref: '#/components/responses/NotFoundErros'
-#    post:
-#  /professionals/{id}:  
-#    put:
-#    put:
-#    delete:
-#  /pending:
-#    get:
-#  /projects:
-#    get:
-#    post:
-#  /projects/{id}:
-#    patch:
-#    put:
-#    delete:
-#  /team:
-#    get:
-#    post:
-#  /team/{id}:
-#    patch:
-#    put:
-#    delete:  
+          $ref: "#/components/responses/NotFoundErros"
+  /projects:
+    get:
+      summary: List projects by page (5 per request)
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+            default: 1
+          required: true
+          description: The number of pages
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Project"
+          description: Project list
+        "404":
+          $ref: "#/components/responses/NotFoundErros"
+    post:
+      summary: Add a new project
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Project"
+      responses:
+        "200":
+          description: Project added
+  /projects/{id}:
+    put:
+      summary: Modify the status of a project
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+          description: the id of professional to be modify
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Project"
+      responses:
+        "200":
+          description: Projected updated
+    patch:
+      summary: Modify a current project
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+          description: the id of project to be modify
+      requestBody:
+        description: " Possible status
+
+        - active
+
+        - finished
+
+        - canceled "
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+              example:
+                status: "finished"
+      responses:
+        "200":
+          description: Project status updated
+    delete:
+      summary: Delete a project from database
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+          description: id of the project to be deleted
+      responses:
+        "200":
+          description: Project deleted
+
+  /teams:
+    get:
+      summary: List teams by page (5 per request)
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+            default: 1
+          required: true
+          description: The number of pages
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Team"
+          description: Teams list
+        "404":
+          $ref: "#/components/responses/NotFoundErros"
+    post:
+      summary: Add a new team
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Team"
+      responses:
+        "200":
+          description: Team added
+  /teams/{id}:
+    put:
+      summary: Modify the status of a teams
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+          description: the id of team to be modify
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Team"
+      responses:
+        "200":
+          description: Team updated
+    patch:
+      summary: Modify a current team
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+          description: the id of team to be modify
+      requestBody:
+        description: " Possible status
+        - active
+
+        - busy
+
+        - dismiss "
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+              example:
+                status: "active"
+      responses:
+        "200":
+          description: Team status updated
+    delete:
+      summary: Delete a team from database
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+          description: id of the team to be deleted
+      responses:
+        "200":
+          description: Team deleted
+
+  /rating:
+    get:
+      summary: List ratings by page (5 per request)
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+            default: 1
+          required: true
+          description: The number of pages
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Rating"
+          description: Rating list
+        "404":
+          $ref: "#/components/responses/NotFoundErros"
+    post:
+      summary: Add a new rating
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Rating"
+      responses:
+        "200":
+          description: Rating added
+  /rating/{id}:
+    put:
+      summary: Modify a current rating
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+          description: the id of rating to be modify
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Rating"
+      responses:
+        "200":
+          description: Rating updated
+    patch:
+      summary: Modify the current status of a rating
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+          description: the id of rating to be modify
+      requestBody:
+        description: " Possible status
+        - editable
+
+        - published
+
+        - pending "
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+              example:
+                status: "editable"
+      responses:
+        "200":
+          description: Rating status updated
+    delete:
+      summary: Delete a rating from database
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+          description: id of the rating to be deleted
+      responses:
+        "200":
+          description: Rating deleted
+ 
+  /ticket:
+    get:
+      summary: List tickets by page (5 per request)
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+            default: 1
+          required: true
+          description: The number of pages
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                  $ref: "#/components/schemas/ClientTickets"
+          description: Ticket list
+        "404":
+          $ref: "#/components/responses/NotFoundErros"
+    post:
+      summary: Add a new ticket
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Ticket"
+      responses:
+        "200":
+          description: Ticket added
+  /ticket/{id}:
+    put:
+      summary: Modify a current ticket
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+          description: the id of ticket to be modify
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Ticket"
+      responses:
+        "200":
+          description: Ticket updated
+    patch:
+      summary: Modify the current status of a ticket
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+          description: the id of ticket to be modify
+      requestBody:
+        description: " Possible status
+        - open
+
+        - solved
+
+        - canceled
+        
+        - suspended"
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+              example:
+                status: "open"
+      responses:
+        "200":
+          description: Ticket status updated
+    delete:
+      summary: Delete a ticket from database
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+          description: id of the ticket to be deleted
+      responses:
+        "200":
+          description: Ticket deleted
+ 
 components:
   responses:
     NotFoundErros:
@@ -783,6 +1289,8 @@ components:
     Budget:
       type: object
       properties:
+        id:
+          type: integer
         name:
           type: string
         title:
@@ -816,6 +1324,8 @@ components:
         phoneNumber:
           type: string
         email:
+          type: string
+        status:
           type: string
       example:
         name: Paulo
@@ -894,29 +1404,27 @@ components:
           type: string
         avatarUrl:
           type: string
-    Professionals:
-      type: array
-      items:
-        type: object
-        properties:
-          id:
-            type: integer
-          cvId:
-            type: integer
-          avatar:
+    Professional:
+      type: object
+      properties:
+        id:
+          type: integer
+        cvId:
+          type: integer
+        avatar:
+          type: string
+        rating:
+          type: number
+        specialties:
+          type: array
+          items:
             type: string
-          rating:
-            type: number
-          specialties:
-            type: array
-            items:
-              type: string
-        example:
-          id: 1
-          cvId: 34 
-          avatar:  https://api.adorable.io/avatars/100/abott@adorable
-          rating: 4.9
-          specialties: ['pedreiro', 'encanador','eletricista']
+      example:
+        id: 1
+        cvId: 34 
+        avatar:  https://api.adorable.io/avatars/100/abott@adorable
+        rating: 4.9
+        specialties: ['pedreiro', 'encanador','eletricista']
     Budgets:
       type: array
       items:
@@ -1091,21 +1599,18 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/Budget"
-    Notifications:
-      type: object
-      properties:
-        notificationName:
-          type: string
-        notificationValue:
-          type: number
     Team:
       type: array
       items:
-        type: integer
+        $ref: '#/components/schemas/Professional'
     Project:
       type: object
       properties:
+        id:
+          type: integer
         client:
+          type: string
+        status:
           type: string
         budget:
           $ref: "#/components/schemas/Budget"
