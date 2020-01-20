@@ -1,0 +1,1120 @@
+openapi: 3.0.0
+info:
+  title: CvReformas API
+  description: <h1> Reformas e Construções
+
+
+    This api exposes routes of a construction and renovation project management application.
+
+    - Should be possible acess restricted areas in `/client` routes.
+
+    - Should be possible acess adm areas in `/admin` routes.
+
+    - Should be possible request new budgets in `/budget` routes.
+
+  version: 1.0.1
+  contact:
+    email: 34s0ft@34s0ft.com
+servers:
+  - url: http://api.cvreformas.com/v1
+    description:  Main server (production) server
+  - url: http://staging-api.cvreformas.com
+    description: Internal staging server for testing
+# host: localhost:8080
+# basePath: /cv-reformas/v1
+# schemes:
+#   - http
+#   - https
+paths:
+  /session:
+    post:
+      summary: Create a session
+      requestBody:
+        description: Email and password
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Session"
+      responses:
+        "200":
+          description: A JSON whith basic client info
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Token"
+        "400":
+          description: Wrong email or passsord
+        "401":
+          description: Authorization error
+        default:
+          description: Unexpected error
+  /users:
+    get:
+      summary: Retrive a list of users
+      responses:
+        '200':
+          description: A list of user objects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '404':
+          description: Not found
+    post:
+      summary: Create a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        "200":
+          description: User created
+  /users/{id}:
+    get:
+      summary: Retrive a User profile Data
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: The user id
+      responses:
+        '200':
+          description: User data retrived
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profile'
+        '404':
+          description: Not Found    
+    put:
+      summary: Update a user data
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: The user id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Profile'
+      responses:
+        '200':
+          description: User updated
+        '404':
+          description: Not Found
+    delete:
+      summary: Remove a user 
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: The user id
+      
+      responses:
+        '200':
+          description: User removed
+        '404':
+          description: Not Found      
+  /clients:
+    post:
+      summary: Create a new client
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        "200":
+          description: Curriculum has been received
+      
+        
+    get:
+      summary: List clients by page (5 per request)
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+          required: true
+          description: The number of pages
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Clients'
+          description: Clients list
+        "404":
+          $ref: '#/components/responses/NotFoundErros'
+  /clients/{id}:
+    get:
+      summary: Return a client by id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The Id of the user to return
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+      responses:
+        "200":
+          description: A Client Object
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Client"
+    put:
+      summary: Update data of a client
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The Id of the user to updated
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Profile"
+      responses:
+        "200":
+          description: A Client Object
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Client"
+    delete:
+      summary: Delete a client from database
+      parameters: 
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+          description: the id of the client to be deleted
+      responses:
+       "200":
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg: 
+                    type: string
+                example: 
+                  msg: O cliente João foi apagado.
+          description: Deleted client name        
+  /dashboard:
+    get:
+      summary: Bring graphical informations
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Adm area data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Dashboard"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErros"
+  /services:
+    post:
+      summary: Create a new service
+      requestBody:
+        content:
+          application/json:
+            schema:
+               $ref: "#/components/schemas/Service"
+      responses:
+        '200':
+          description: A new service has been created
+    get:
+      summary: List of available services
+      responses:
+        "200":
+          description: List of services providers
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Services"
+  /services/{id}:
+    delete: 
+      summary: Delete a service by his Id
+      parameters: 
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+          description: the id of service to be deleted
+      responses:
+        '200':
+          description: Service deleted
+    put:
+      summary: Update a service by his Id
+      parameters: 
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+          description: the id of service to be updated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Service'
+      responses:
+        '200':
+          description: Service updated
+  /curriculum:
+    get:
+      summary: Retrive a list of new curriculums
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+            default: 1
+          required: true
+          description: The number of pages
+        
+      responses:    
+        '200':
+          description: Array of curriculums
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Curriculum"
+            
+    post:
+      summary: Post of a profissional curriculum
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Curriculum"
+      responses:
+        "200":
+          description: Curriculum has been received
+  /curriculum/{id}:
+    delete: 
+      summary: Delete a curriculum by his Id
+      parameters: 
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+          description: the id of curriculum to be deleted
+      responses:
+        '200':
+          description: Curriculum deleted
+    patch:
+      summary: Modify a currilum status
+      parameters: 
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+          description: the id of curriculum to be modify
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+              example:
+                status: 'ok'
+      responses:
+        '200':
+          description: Curriculum updated
+  /budget:
+    get:
+      summary: List budgets by page (5 per request)
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+          required: true
+          description: The number of pages
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Budgets'
+          description: Clients list
+        "404":
+          $ref: '#/components/responses/NotFoundErros'
+    post:
+      summary: Send new budget
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Budget'
+      responses:
+        "200":
+          description: Budget request sent
+  /budget/{id}:
+    put:
+      summary: Modify a current Budget
+      parameters: 
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+          description: the id of budget to be modify
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Budget'
+      responses:
+        '200':
+          description: Budget updated
+    patch:
+      summary: Modify a current Budget
+      parameters: 
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+          description: the id of budget to be modify
+      requestBody:
+        description: " Possible status
+        
+        - aproved
+
+        - rejected 
+
+        - canceled
+
+        - acepted  "
+        
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                price:
+                  type: integer
+                timing:
+                  type: integer
+              example:
+                status: 'aproved'
+                price:
+                timing:
+      responses:
+        '200':
+          description: Budget updated
+    delete:
+      summary: Delete a current Budget
+      parameters: 
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+          description: the id of budget to be modify
+      responses:
+        '200':
+          description: Budget deleted
+  /files:
+    post:
+      summary: Send a pdf with a professional curriculum
+      requestBody:
+        content:
+            application/pdf:
+              schema:
+                $ref: '#/components/schemas/File'  
+      responses:
+        '200':
+          description: File sent
+  /files/{id}:
+    get:
+      summary: Retrive a file
+      parameters: 
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+          description: the id of the file to be retrived
+      responses:
+        '200':
+          description: here goes your file
+          content:
+            application/pdf:
+              schema:
+                $ref: '#/components/schemas/File'
+    delete:
+      summary: Delete a file
+      parameters: 
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+          description: the id of the file to be deleted
+      responses:
+        '200':
+          description: File deleted
+  /avatar:
+    post:
+      summary: Send a avatar photo
+      requestBody:
+        content:
+          image/*:
+            schema:
+              $ref: '#/components/schemas/Photo'
+      responses:
+        '200':
+          description: Avatar sent
+  /avatar/{id}:
+    delete:
+      summary: Delete a avatar
+      parameters: 
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+          description: the id of the avatar to be deleted
+      responses:
+        '200':      
+          description: Avatar deleted
+  /photos:
+    post:
+      summary: Send a photos list
+      requestBody:
+        content:
+          image/*:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Photo'
+      responses:
+        '200':
+          description: Photos sent
+  /photos/{id}:
+    delete:
+      summary: Delete a photo
+      parameters: 
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+          description: the id of the photo to be deleted
+      responses:
+        '200':
+          description: This photo has been deleted
+    get:
+      summary: Retrive a photo
+      parameters: 
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+          description: the id of the photo to be retrived
+      responses:
+        '200':
+          description: here goes your file
+          content:
+            image/*:
+              schema:
+                $ref: '#/components/schemas/Photo'
+  /evaluations:
+    get:
+      summary: List evaluations by page (5 per request)
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+          required: true
+          description: The number of pages
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Evaluation'
+          description: Clients list
+        "404":
+          $ref: '#/components/responses/NotFoundErros'
+  /evaluations/{id}:
+    delete:
+      summary: Delete evaluation
+      parameters: 
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+          description: the id of the evaluation to be modify
+      responses:
+        "200":
+          description: Evaluation deleted request     
+    patch:
+      summary: Publish evaluation
+      parameters: 
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+          description: the id of the evaluation to be modify
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+              example:
+                status: 'public' # default private
+      responses:
+        "200":
+          description: Evaluation status change sent 
+
+  /professionals:
+    get:
+      summary: List professionals by page (5 per request)
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+          required: true
+          description: The number of pages
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Professionals'
+          description: Clients list
+        "404":
+          $ref: '#/components/responses/NotFoundErros'
+#    post:
+#  /professionals/{id}:  
+#    put:
+#    put:
+#    delete:
+#  /pending:
+#    get:
+#  /projects:
+#    get:
+#    post:
+#  /projects/{id}:
+#    patch:
+#    put:
+#    delete:
+#  /team:
+#    get:
+#    post:
+#  /team/{id}:
+#    patch:
+#    put:
+#    delete:  
+components:
+  responses:
+    NotFoundErros:
+      description: Not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    UnauthorizedErros:
+      description: Acess token is missing or is invalid
+  securitySchemes:
+    bearerAuth: # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT # optional
+  schemas:
+    Photo:
+      type: string
+      format: binary
+    File:
+      type: string
+      format: binary
+    Client:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        phone:
+          type: string
+        email:
+          type: string
+      example:
+        id: 1
+        name: Joao da Silva
+        phone: +5521972857728
+        email: joao@gmail.com
+    Clients:
+      type: array
+      items:
+        $ref: "#/components/schemas/Client"
+    Token:
+      type: object
+      properties:
+        token:
+          type: string
+      example:
+        token: '2654g39hf6295hdf6g294jy39dnd'
+    Service:
+      type: object
+      properties:
+        id:
+          type: string
+        imageUrl:
+          type: string
+        service:
+          type: string 
+      example:
+        id: 1
+        imageUrl: 'https://picsum.photos/300/500'
+        service: Pintura de rodapé
+    Services:
+      type: array
+      items:
+        $ref: '#/components/schemas/Service'
+    Session:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      required:
+        - email
+        - password
+      example:
+        email: 'joaodaperimetral@gmail.com'
+        password: '12345678'
+    User:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        passwordConfirmation:
+          type: string
+      example:
+        name: Jorge
+        email: jorge@gmail.com
+        password: 12345678
+        passwordConfirmation: 12345678
+    Budget:
+      type: object
+      properties:
+        name:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        category:
+          type: string
+        height:
+          type: number
+          format: float
+        widht:
+          type: number
+          format: float
+        depth:
+          type: number
+          format: float
+        area:
+          type: number
+          format: float
+        numberOfFlors:
+          type: integer
+          format: int32
+        desirableTime:
+          type: integer
+          format: int32
+        photosUrl:
+          type: array
+          items: 
+            type: string
+        phoneNumber:
+          type: string
+        email:
+          type: string
+      example:
+        name: Paulo
+        title: Armario de suite com 6 portas
+        description: Quero um armario de suite com 6 portas na cor marfim
+        category: Movéis sob encomenda
+        height: 2
+        widht: 4
+        depth: 0.8
+        numberOfLors: null
+        desirableTime: 30 
+        photosUrl: ['https://picsum.photos/200/300','https://picsum.photos/200/300','https://picsum.photos/200/300','https://picsum.photos/200/300']
+    Curriculum:
+      type: object
+      properties:
+        name:
+          type: string
+        surname:
+          type: string
+        avatar:
+          type: string
+        email:
+          type: string
+        cpf:
+          type: string
+        cep:
+          type: string
+        street:
+          type: string
+        houseNumber:
+          type: string
+        neighborhood:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        phoneNumber:
+          type: string
+        specialties:
+          type: array
+          items:
+            type: string
+        curriculumUrl:
+          type: string
+        photosUrl:
+          type: array
+          items:
+            type: string
+      example:
+        name: Jorge
+        surmane: Pintor de Rodapé
+        avatar: https://api.adorable.io/avatars/100/abott@adorable.png
+        email: jorge@bol.com.br
+        cpf: '123455678'
+        cep: '12345678'
+        street: Rua do Zé
+        houseNumber: 99
+        neighborhood: Vila do Zé
+        city: Cidade do Zé
+        state: RZ
+        phoneNumber: +552134566655
+        specialties: ['pintor','pedreiro','jedi']
+        curriculumUrl: null
+        photosUrl: ['https://picsum.photos/200/300', 'https://picsum.photos/200/300', 'https://picsum.photos/200/300', 'https://picsum.photos/200/300']
+    Evaluation:
+      type: object
+      properties:
+        id:
+          type: integer
+        ratingId:
+          type: integer
+        rating:
+          type: number
+        description:
+          type: string
+        avatarUrl:
+          type: string
+    Professionals:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: integer
+          cvId:
+            type: integer
+          avatar:
+            type: string
+          rating:
+            type: number
+          specialties:
+            type: array
+            items:
+              type: string
+        example:
+          id: 1
+          cvId: 34 
+          avatar:  https://api.adorable.io/avatars/100/abott@adorable
+          rating: 4.9
+          specialties: ['pedreiro', 'encanador','eletricista']
+    Budgets:
+      type: array
+      items:
+        $ref: "#/components/schemas/Budget"
+    FinishedBudgets:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+          finishedDate:
+            type: string
+          title:
+            type: string
+          budget:
+            type: number
+    Rating:
+      type: object
+      properties:
+        id:
+          type: string
+        team:
+          type: array
+          items:
+            type: object
+            properties:
+              professionalId:
+                type: string
+              rating:
+                type: number
+        quality:
+          type: number
+        timing:
+          type: number
+        price:
+          type: number
+        suport:
+          type: number
+        generalOpinion:
+          type: string
+    Ticket:
+      type: object
+      properties:
+        budgetId:
+          type: string
+        title:
+          type: string
+        category:
+          type: string
+        description:
+          type: string
+        date:
+          type: string
+        isSolved:
+          type: boolean
+        solvedIn:
+          type: string
+    ClientTickets:
+      type: array
+      items:
+        $ref: "#/components/schemas/Ticket"
+    Profile:
+      type: object
+      properties:
+        avatar:
+          type: string
+        name:
+          type: string
+        surname:
+          type: string
+        email:
+          type: string
+        oldPassword:
+          type: string
+        password:
+          type: string
+        passwordConfirmation:
+          type: string
+        cpf:
+          type: string
+        cep:
+          type: string
+        street:
+          type: string
+        houseNumber:
+          type: string
+        neighborhood:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        phoneNumber:
+          type: string
+      required:
+        - oldPassword
+        - email
+      example:
+        avatar: https://api.adorable.io/avatars/100/abott@adorable.png
+        name: Batman
+        surname: Feira da Fruta
+        email: feiradafruta@batman.com
+        oldPassword: coringa123
+        password: robinS2
+        passwordConfirmation: robinS2
+        cpf: 12312312312
+        cep: 20967-095
+        street: Rua da Feira
+        houseNumber: 123
+        neighbothood: Bairo da Fruta
+        city: Gotan
+        state: Utar
+        phoneNumber: 1223452345
+    Dashboard:
+      type: object
+      properties:
+        clients:
+          type: number
+        budgets:
+          type: number
+        projects:
+          type: number
+        billing:
+          type: number
+        budgetsByMonth:
+          type: object
+          properties:
+            months:
+              type: array
+              items:
+                type: string
+            values:
+              type: array
+              items:
+                type: number
+        projectsByMonth:
+          type: object
+          properties:
+            months:
+              type: array
+              items:
+                type: string
+            values:
+              type: array
+              items:
+                type: number
+        sendedBudgets:
+          type: number
+        finishedProjects:
+          type: number
+      example:
+        clients: 58
+        budgets: 301
+        projects: 30
+        billing: 'R$ 34 000,00'
+        budgetsByMonth: {months:['jan','fev','mar', 'abr', 'mai', 'jun'], values:[5,6,7,4,8,9]}
+        sendedBudgets: 34
+        finishedProjects: 23
+    Pending:
+      type: object
+      properties:
+        pending:
+          type: number
+        sended:
+          type: number
+        requests:
+          type: number
+        hireds:
+          type: number
+        pendingBudgets:
+          type: array
+          items:
+            $ref: "#/components/schemas/Budget"
+    Notifications:
+      type: object
+      properties:
+        notificationName:
+          type: string
+        notificationValue:
+          type: number
+    Team:
+      type: array
+      items:
+        type: integer
+    Project:
+      type: object
+      properties:
+        client:
+          type: string
+        budget:
+          $ref: "#/components/schemas/Budget"
+        team:
+          $ref: "#/components/schemas/Team"
+    Error:
+      type: object
+      properties:
+        msg:
+          type: string
+      example:
+        msg: Informação não encontrada

@@ -1,0 +1,94 @@
+/professionals:
+  get:
+    summary: List professionals by page (5 per request)
+    parameters:
+      - in: query
+        name: page
+        schema:
+          type: integer
+        required: true
+        description: The number of pages
+    responses:
+      "200":
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Professionals"
+        description: Clients list
+      "404":
+        $ref: "#/components/responses/NotFoundErros"
+  post:
+    summary: Add a new professionals
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Professionals"
+    responses:
+      "200":
+        description: Professional added
+/professionals/{id}:
+  put:
+    summary: Modify the status of a professional
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+        description: the id of professional to be modify
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Professional"
+    responses:
+      "200":
+        description: Professional updated
+  patch:
+    summary: Modify a current Budget
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+        description: the id of budget to be modify
+    requestBody:
+      description: " Possible status
+
+        - hired
+
+        - dismiss
+
+        - standby "
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+            example:
+              status: "hired"
+      responses:
+        "200":
+          description: Budget updated
+  delete:
+    summary: Delete a professional from database
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+        description: the id of professional to be deleted
+    responses:
+      "200":
+        description: Professional deleted
