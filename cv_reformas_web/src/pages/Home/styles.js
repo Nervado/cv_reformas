@@ -78,21 +78,54 @@ export const Card = styled.li`
 
 export const Mission = styled.div`
   width: 100%;
-  height: 150px;
+  height: 700px;
   display: flex;
   align-items: center;
   justify-content: center;
 
   div {
     width: 60%;
+    max-height: 700px;
+    height: auto;
 
     p {
+      margin-top: 20px;
       text-align: center;
       font-family: 'Helvetica';
-      font-size: 20px;
-      color: #df7e38;
+      font-size: 35px;
+      color: #666;
     }
   }
 `;
 
-export const Objective = styled.div``;
+export const Objective = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 400px;
+
+  padding: 0 50px 0 50px;
+
+  div {
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    border: 4px solid #fff;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  aside {
+    width: 50%;
+    p {
+      text-align: center;
+      font-family: 'Helvetica';
+      font-size: 29px;
+      color: #666;
+    }
+  }
+`;

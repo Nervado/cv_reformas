@@ -48,7 +48,7 @@ export default function Home() {
             <div>
               <img src={job} alt="img" />
               <div>
-                <span>Desenvolvimento continuo e construção</span>
+                <span>Desenvolvimento continuo e construção civil</span>
               </div>
             </div>
           </Card>
@@ -77,7 +77,10 @@ export default function Home() {
           </div>
         </Mission>
         <Objective>
-          <img src={objimage} alt="img" />
+          <div>
+            <img src={objimage} alt="img" />
+          </div>
+
           <aside>
             <p>
               “Nosso objetivo é ser a empresa de Reformas e Construções líder no

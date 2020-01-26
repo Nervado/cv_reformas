@@ -23,7 +23,7 @@ export const Container = styled.div`
 
   div {
     margin-top: 100px;
-    height: 50%;
+    height: 100%;
     width: 50%;
     position: absolute;
 
@@ -32,15 +32,15 @@ export const Container = styled.div`
     div {
       cursor: pointer;
 
-      height: 50%;
+      height: 100%;
       width: 100%;
 
-      margin-top: 10%;
+      margin-top: -52%;
       left: calc(50%);
 
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
+      justify-content: center;
       align-items: center;
       text-align: center;
 

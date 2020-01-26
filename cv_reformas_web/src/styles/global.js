@@ -21,7 +21,7 @@ export default createGlobalStyle`
   }
 
   body , html, #root {
-    height: 2000px;
+    height: 2700px;
     width: 100%;
     z-index: 0;
   }
