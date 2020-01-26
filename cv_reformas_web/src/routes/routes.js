@@ -1,10 +1,11 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 
 // Import Layouts
-import AuthLayout from '~/components/Layouts/auth';
-import DefaultLayout from '~/components/Layouts/default';
+// import AdminLayout from '~/components/Layouts/Admin';
+import DefaultLayout from '~/components/Layouts/Default';
 
 import { store } from '~/store/index';
 
@@ -22,7 +23,7 @@ export default function RouterWrapper({
     return <Redirect to="/dashboard" />;
   }
 
-  const Layout = signed ? DefaultLayout : AuthLayout;
+  const Layout = signed ? DefaultLayout : DefaultLayout;
 
   return (
     <Route
