@@ -65,11 +65,16 @@ export default function Home() {
           </Card>
         </Cards>
         <Mission>
-          “Nossa missão é agregar valor aos nossos clientes através da prestação
-          de serviços de Reformas, Construções e Gerenciamento de projetos de
-          infraestrutura. Acreditamos que a capacitação humana é fundamental
-          para prestar os melhores serviços. Nos comprometemos com a segurança
-          de nossos colaboradores e prezamos pelo bem-estar das comunidades.”
+          <div>
+            <p>
+              “Nossa missão é agregar valor aos nossos clientes através da
+              prestação de serviços de Reformas, Construções e Gerenciamento de
+              projetos de infraestrutura. Acreditamos que a capacitação humana é
+              fundamental para prestar os melhores serviços. Nos comprometemos
+              com a segurança de nossos colaboradores e prezamos pelo bem-estar
+              das comunidades.”
+            </p>
+          </div>
         </Mission>
         <Objective>
           <img src={objimage} alt="img" />

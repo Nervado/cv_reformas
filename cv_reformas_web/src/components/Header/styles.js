@@ -3,11 +3,14 @@ import styled from 'styled-components';
 export const Container = styled.div`
   height: 150px;
   background: #fcfcfc;
+  position: fixed;
+  z-index: 1;
+  width: 100%;
 `;
 
 export const Content = styled.div`
   width: 100%;
-  position: fixed;
+
   background: #fcfcfc;
   height: 150px;
   max-width: 1800px;

@@ -23,6 +23,7 @@ export default createGlobalStyle`
   body , html, #root {
     height: 2000px;
     width: 100%;
+    z-index: 0;
   }
 
   body {

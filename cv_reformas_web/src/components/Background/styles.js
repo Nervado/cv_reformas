@@ -3,52 +3,47 @@ import styled from 'styled-components';
 import background from '~/assets/background.png';
 
 export const Container = styled.div`
-  overflow: hidden;
-  width: 1900px;
+  width: 100%;
   height: 1000px;
   border: none;
-  margin-left: -100px;
   position: relative;
-  margin-top: 0;
+  overflow: hidden;
 
   img {
     top: -1px;
     position: absolute;
     background: url(${background});
-    width: 1900px;
-    height: 1200px;
-    background-size: contain;
+    width: 100%;
+    height: 100%;
+
     border: none;
-    z-index: -2;
+
+    overflow: hidden;
   }
 
   div {
-    z-index: 0;
-    overflow: hidden;
-
-    display: ${props => (props.logged ? 'none' : 'block')};
-
-    height: 800%;
-    width: 100%;
+    margin-top: 100px;
+    height: 50%;
+    width: 50%;
     position: absolute;
+
+    display: ${props => (props.logged ? 'none' : 'flex')};
 
     div {
       cursor: pointer;
 
-      position: fixed;
+      height: 50%;
+      width: 100%;
 
-      height: 100%;
-      width: 50%;
-
-      margin-top: 5%;
-      left: calc(50% - 50% / 2);
+      margin-top: 10%;
+      left: calc(50%);
 
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
       align-items: center;
-
       text-align: center;
+
       h1,
       h2 {
         color: #707070;
