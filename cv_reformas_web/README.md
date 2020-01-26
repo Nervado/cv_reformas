@@ -1,3 +1,9 @@
+<p align="center">
+  <a href="http://34s0ft.com/" target="blank"><img src="./Logo.svg" width="420" alt="34s0ft Logo" /></a>
+</p>
+
+## Description
+
 This project is a private app to manage data of a bulding and renovation company
 
 powered by 34s0ft
