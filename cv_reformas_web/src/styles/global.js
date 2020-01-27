@@ -24,6 +24,10 @@ export default createGlobalStyle`
     height: 2700px;
     width: 100%;
     z-index: 0;
+
+    height: ${props => (props.spaOn ? '860px' : '2700')};
+    height: ${props => (props.formOn ? '1200px' : '2700')};
+
   }
 
   body {
@@ -40,4 +44,6 @@ export default createGlobalStyle`
   button {
     cursor: pointer;
   }
+
+
 `;

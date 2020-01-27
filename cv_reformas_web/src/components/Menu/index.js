@@ -7,7 +7,7 @@ export default function Menu() {
   return (
     <Container>
       <StyledNavLink to="/">Serviços</StyledNavLink>
-      <StyledNavLink to="/">Profissionais</StyledNavLink>
+      <StyledNavLink to="/professionals">Profissionais</StyledNavLink>
       <StyledNavLink to="/">Trabalhe conosco</StyledNavLink>
       <StyledNavLink to="/">Cadastre-se</StyledNavLink>
       <StyledNavLink to="/">Sobre</StyledNavLink>

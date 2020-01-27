@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 
 import { Container } from './styles';
 
-export default function Background({ logged = false }) {
+export default function Background({ logged, spaOn }) {
   return (
-    <Container>
+    <Container logged={logged ? 1 : 0} spaOn={spaOn ? 1 : 0}>
       <img alt="background" />
-      <div logged={logged ? 1 : 0}>
+      <div>
         <div>
           <h1>
             Onde seus sonhos tornam-se <span>realidade!</span>
@@ -24,8 +24,10 @@ export default function Background({ logged = false }) {
 
 Background.propTypes = {
   logged: PropTypes.bool,
+  spaOn: PropTypes.bool,
 };
 
 Background.defaultProps = {
   logged: false,
+  spaOn: false,
 };

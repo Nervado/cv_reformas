@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 // import { useSelector } from 'react-redux';
 
 // import { Link } from 'react-router-dom';
@@ -9,10 +10,10 @@ import Menu from '~/components/Menu';
 
 import { Container, Content } from './styles';
 
-export default function Header() {
+export default function Header({ spaOn }) {
   // const profile = useSelector(state => state.user.profile);
   return (
-    <Container>
+    <Container spaOn={spaOn ? 1 : 0}>
       <Content>
         <img src={logo} alt="logo" width="163px" height="134px" />
         <nav>
@@ -28,3 +29,11 @@ export default function Header() {
     </Container>
   );
 }
+
+Header.propTypes = {
+  spaOn: PropTypes.bool,
+};
+
+Header.defaultProps = {
+  spaOn: false,
+};

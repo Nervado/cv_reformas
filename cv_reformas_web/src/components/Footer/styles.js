@@ -1,10 +1,13 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  position: ${props => (props.spaOn ? 'absolute' : 'static')};
+  margin-top: ${props => (props.spaOn ? '700px' : '0px')};
   height: 100px;
   width: 100%;
   padding: 60px;
   display: flex;
+  flex-direction: row;
 
   justify-content: space-between;
   align-items: center;
@@ -23,8 +26,8 @@ export const Container = styled.div`
       align-items: center;
 
       img {
-        width: 30%;
-        margin-top: -20px;
+        width: 40%;
+        margin-top: -5px;
         margin-left: 10px;
       }
       div {

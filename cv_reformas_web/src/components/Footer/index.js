@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import {
   FaWhatsappSquare,
   FaFacebookSquare,
@@ -11,27 +13,29 @@ import Soft from '~/assets/34s0ft.svg';
 
 import { Container } from './styles';
 
-export default function Footer() {
+export default function Footer({ spaOn }) {
   return (
-    <Container>
+    <Container spaOn={spaOn ? 1 : 0}>
       <div>
         <div>
-          <spam>Powered by </spam>
-          <img src={Soft} alt="34s0ft" />
+          <span>Powered by </span>
+          <a href="https://34s0ft.com.br">
+            <img src={Soft} alt="34s0ft" />
+          </a>
         </div>
       </div>
-      <div center>
-        <div center>
-          <div center>
+      <div>
+        <div>
+          <div>
             <MdCopyright style={{ color: 'blue' }} />
-            <spam>All rights reserverd CV Reformas e Construções </spam>
+            <span>All rights reserverd CV Reformas e Construções </span>
           </div>
         </div>
       </div>
       <div>
         <div>
           <div>
-            <spam>Nos siga!</spam>
+            <span>Nos siga!</span>
 
             <a href="https://facebook.com" style={{ cursor: 'pointer' }}>
               <FaFacebookSquare style={{ color: '#38539B', width: '20px' }} />
@@ -51,3 +55,11 @@ export default function Footer() {
     </Container>
   );
 }
+
+Footer.propTypes = {
+  spaOn: PropTypes.bool,
+};
+
+Footer.defaultProps = {
+  spaOn: false,
+};

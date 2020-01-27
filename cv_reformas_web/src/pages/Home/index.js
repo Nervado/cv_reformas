@@ -22,7 +22,7 @@ import {
 export default function Home() {
   return (
     <Container>
-      <Background logged />
+      <Background />
 
       <Content>
         <Lem>

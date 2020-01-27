@@ -4,9 +4,12 @@ import background from '~/assets/background.png';
 
 export const Container = styled.div`
   width: 100%;
-  height: 1000px;
+
+  height: ${props => (props.logged ? '900px' : '1000px')};
+
   border: none;
-  position: relative;
+  position: ${props => (props.spaOn ? 'static' : 'relative')};
+
   overflow: hidden;
 
   img {
@@ -19,10 +22,11 @@ export const Container = styled.div`
     border: none;
 
     overflow: hidden;
+    opacity: ${props => (props.logged ? '0.2' : '1.0')};
   }
 
   div {
-    margin-top: 100px;
+    margin-top: calc(10%);
     height: 100%;
     width: 50%;
     position: absolute;

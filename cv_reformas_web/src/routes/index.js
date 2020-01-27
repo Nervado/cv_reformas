@@ -3,11 +3,13 @@ import { Switch } from 'react-router-dom';
 
 import Route from './routes';
 import Home from '../pages/Home';
+import Professionals from '~/pages/Professionals';
 
 export default function Routes() {
   return (
     <Switch>
       <Route path="/" exact component={Home} />
+      <Route path="/professionals" exact component={Professionals} />
     </Switch>
   );
 }
