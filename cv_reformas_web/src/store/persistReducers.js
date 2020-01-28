@@ -9,7 +9,7 @@ export default reducers => {
       storage,
       whitelist: ['auth', 'user', 'meetup'],
     },
-    reducers
+    reducers,
   );
   return persistedReducer;
 };

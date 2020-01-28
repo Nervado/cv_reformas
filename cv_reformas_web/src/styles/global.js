@@ -1,5 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
+import background from '~/assets/background.png';
+
 import 'react-toastify/dist/ReactToastify.css';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 
@@ -28,7 +30,26 @@ export default createGlobalStyle`
     height: ${props => (props.spaOn ? '860px' : '2700')};
     height: ${props => (props.formOn ? '1200px' : '2700')};
 
-  }
+
+}
+
+body {
+
+
+
+
+}
+body::after {
+  content: "";
+  background: url(${background});
+  opacity: 0.2;
+  top: 150px;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+}
 
   body {
     -webkit-font-smoothing: antialiased;

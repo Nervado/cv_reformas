@@ -7,6 +7,8 @@ export const Container = styled.li`
   box-shadow: 4px 4px 5px #707070;
 
   border-radius: 50px 0px 0px 0px;
+
+  background-color: #fff;
 `;
 
 export const Content = styled.div`
@@ -18,16 +20,4 @@ export const Content = styled.div`
   height: 100%;
 
   padding: 0 10px 0 10px;
-`;
-
-export const Text = styled.div`
-  height: 100%;
-  width: 60%;
-  display: flex;
-  align-items: center;
-  text-align: left;
-
-  span {
-    width: 100%;
-  }
 `;

@@ -6,7 +6,7 @@ import { Container } from './styles';
 export default function Background({ logged, spaOn }) {
   return (
     <Container logged={logged ? 1 : 0} spaOn={spaOn ? 1 : 0}>
-      <img alt="background" />
+      <img alt="" />
       <div>
         <div>
           <h1>

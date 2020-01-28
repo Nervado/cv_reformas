@@ -1,23 +1,20 @@
 import React from 'react';
 
-import { Container, Content, Text } from './styles';
+import Skills from '~/components/Skills';
+
+import { Container, Content } from './styles';
 
 import MiniAvatarRound from '~/components/MiniAvatarRound';
 
-import Score from '~/components/Score';
+import ScoreStarry from '~/components/ScoreStarry';
 
 export default function ShortProfile() {
   return (
     <Container>
       <Content>
         <MiniAvatarRound />
-        <Text>
-          <span>
-            {' '}
-            “Foi uma experiência incrível usar os serviços da C&V Reformas”
-          </span>
-        </Text>
-        <Score />
+        <Skills />
+        <ScoreStarry rating={4.6} />
       </Content>
     </Container>
   );

@@ -3,8 +3,6 @@ import styled from 'styled-components';
 export const Container = styled.div`
   height: 150px;
   background: #fcfcfc;
-  position: ${props => (props.spaOn ? 'relative' : 'fixed')};
-
   z-index: 1;
   width: 100%;
 `;

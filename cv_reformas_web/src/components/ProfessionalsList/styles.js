@@ -11,7 +11,7 @@ export const Container = styled.div`
 
   ul {
     overflow: scroll;
-    height: 90%;
+    height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;

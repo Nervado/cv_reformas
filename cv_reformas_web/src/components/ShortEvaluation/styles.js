@@ -5,6 +5,8 @@ export const Container = styled.li`
   width: 100%;
   height: 80px;
   box-shadow: 4px 4px 5px #707070;
+
+  background-color: #fff;
 `;
 
 export const Content = styled.div`

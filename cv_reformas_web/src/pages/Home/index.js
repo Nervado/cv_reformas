@@ -23,7 +23,6 @@ export default function Home() {
   return (
     <Container>
       <Background />
-
       <Content>
         <Lem>
           <div>

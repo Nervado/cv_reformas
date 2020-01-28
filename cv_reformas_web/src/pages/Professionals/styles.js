@@ -1,15 +1,12 @@
 import styled from 'styled-components';
 
-export const HeaderSpacing = styled.div`
-  height: 25%;
-`;
-
 export const Container = styled.div`
   width: 100%;
   height: 70%;
 `;
 
 export const Content = styled.div`
+  margin-top: 10px;
   width: 100%;
   height: 100%;
 `;
@@ -29,7 +26,7 @@ export const Title = styled.div`
 export const Lists = styled.div`
   width: 100%;
 
-  height: 90%;
+  height: 80%;
 
   display: flex;
   justify-content: center;

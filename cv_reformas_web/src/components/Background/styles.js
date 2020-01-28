@@ -13,7 +13,7 @@ export const Container = styled.div`
   overflow: hidden;
 
   img {
-    top: -1px;
+    margin-top: -10px;
     position: absolute;
     background: url(${background});
     width: 100%;
