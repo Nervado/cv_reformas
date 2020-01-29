@@ -1,0 +1,22 @@
+import React from 'react';
+import GlobalStyle from '~/styles/global';
+
+import Caroulsel from '~/components/Caurosel';
+
+import Footer from '~/components/Footer';
+import { Container, Content, Title } from './styles';
+
+export default function AvailableServices() {
+  return (
+    <Container>
+      <GlobalStyle spaOn />
+      <Content>
+        <Title>
+          <h1>Nossos Serviços</h1>
+        </Title>
+        <Caroulsel />
+      </Content>
+      <Footer />
+    </Container>
+  );
+}

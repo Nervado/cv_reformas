@@ -6,6 +6,7 @@ import { Route, Redirect } from 'react-router-dom';
 // Import Layouts
 // import AdminLayout from '~/components/Layouts/Admin';
 import DefaultLayout from '~/components/Layouts/Default';
+import Client from '~/components/Layouts/Client';
 
 import { store } from '~/store/index';
 
@@ -23,7 +24,10 @@ export default function RouterWrapper({
     return <Redirect to="/dashboard" />;
   }
 
-  const Layout = signed ? DefaultLayout : DefaultLayout;
+  const formOn = false;
+
+  let Layout = signed ? DefaultLayout : DefaultLayout;
+  Layout = formOn ? Client : DefaultLayout;
 
   return (
     <Route

@@ -6,12 +6,12 @@ import { Container, StyledNavLink } from './styles';
 export default function Menu() {
   return (
     <Container>
-      <StyledNavLink to="/">Serviços</StyledNavLink>
+      <StyledNavLink to="/">Home</StyledNavLink>
+      <StyledNavLink to="/services">Serviços</StyledNavLink>
+      <StyledNavLink to="/">Cadastre-se</StyledNavLink>
+      <StyledNavLink to="/">Contato</StyledNavLink>
       <StyledNavLink to="/professionals">Profissionais</StyledNavLink>
       <StyledNavLink to="/">Trabalhe conosco</StyledNavLink>
-      <StyledNavLink to="/">Cadastre-se</StyledNavLink>
-      <StyledNavLink to="/">Sobre</StyledNavLink>
-      <StyledNavLink to="/">Contato</StyledNavLink>
     </Container>
   );
 }

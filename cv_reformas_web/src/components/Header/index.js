@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 
 // import { Link } from 'react-router-dom';
 
+import { NavLink } from 'react-router-dom';
+
 import logo from '~/assets/logo.svg';
 
 import Menu from '~/components/Menu';
@@ -15,11 +17,17 @@ export default function Header({ spaOn }) {
   return (
     <Container spaOn={spaOn ? 1 : 0}>
       <Content>
-        <img src={logo} alt="logo" width="163px" height="134px" />
+        <NavLink to="/">
+          <img src={logo} alt="logo" width="163px" height="134px" />
+        </NavLink>
+
         <nav>
           <div>
             <div>
-              <button type="button">Orçamento</button>
+              <NavLink to="/budgets">
+                <button type="button">Orçamento</button>
+              </NavLink>
+
               <button type="button">Login</button>
             </div>
             <Menu />
