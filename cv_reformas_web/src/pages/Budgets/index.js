@@ -1,13 +1,18 @@
 import React from 'react';
 
-// import { Container } from './styles';
+import GlobalStyle from '~/styles/global';
+
+import { Container } from './styles';
 
 import BudgetForm from '~/components/BudgetForm';
+import Footer from '~/components/Footer';
 
 export default function Budgets() {
   return (
-    <div>
+    <Container>
+      <GlobalStyle formOn />
       <BudgetForm />
-    </div>
+      <Footer />
+    </Container>
   );
 }

@@ -11,9 +11,9 @@ export default function Routes() {
   return (
     <Switch>
       <Route path="/" exact component={Home} />
-      <Route path="/professionals" exact component={Professionals} />
-      <Route path="/services" exact component={AvaliableServices} />
-      <Route path="/budgets" exact component={Budgets} />
+      <Route path="/professionals" component={Professionals} />
+      <Route path="/services" component={AvaliableServices} />
+      <Route path="/budgets" component={Budgets} />
     </Switch>
   );
 }

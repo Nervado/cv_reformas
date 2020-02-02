@@ -1,5 +1,9 @@
 import React from 'react';
 
+// import { useDispatch } from 'react-redux';
+
+// import { setPageModeRequest } from '~/store/modules/page/actions';
+import Header from '~/components/Header';
 import Footer from '~/components/Footer';
 
 import Background from '~/components/Background';
@@ -20,9 +24,13 @@ import {
 } from './styles';
 
 export default function Home() {
+  // const dispatch = useDispatch();
+
   return (
     <Container>
+      <Header />
       <Background />
+
       <Content>
         <Lem>
           <div>

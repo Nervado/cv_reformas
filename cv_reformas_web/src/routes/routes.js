@@ -1,12 +1,13 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
+// import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 
 // Import Layouts
 // import AdminLayout from '~/components/Layouts/Admin';
 import DefaultLayout from '~/components/Layouts/Default';
-import Client from '~/components/Layouts/Client';
+// import Client from '~/components/Layouts/Client';
 
 import { store } from '~/store/index';
 
@@ -24,10 +25,12 @@ export default function RouterWrapper({
     return <Redirect to="/dashboard" />;
   }
 
-  const formOn = false;
+  // seleciona um status da pagina
+  // const { mode } = store.getState().page;
 
-  let Layout = signed ? DefaultLayout : DefaultLayout;
-  Layout = formOn ? Client : DefaultLayout;
+  // const loading = useSelector(state => state..loading);
+
+  const Layout = signed ? DefaultLayout : DefaultLayout;
 
   return (
     <Route

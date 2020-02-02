@@ -19,7 +19,6 @@ export default createGlobalStyle`
   }
    #root {
     height: 100%;
-
   }
 
   body , html, #root {
@@ -27,23 +26,18 @@ export default createGlobalStyle`
     width: 100%;
     z-index: 0;
 
-    height: ${props => (props.spaOn ? '860px' : '2700')};
-    height: ${props => (props.formOn ? '1200px' : '2700')};
+    height: ${props => (props.spaOn ? '860px' : '2700px')};
+    height: ${props => (props.formOn ? '860px' : '')};
 
 
 }
 
-body {
-
-
-
-
-}
 body::after {
   content: "";
   background: url(${background});
   opacity: 0.2;
   top: 150px;
+  top: ${props => (props.spaOn ? '150px' : '0px')};
   left: 0;
   bottom: 0;
   right: 0;
