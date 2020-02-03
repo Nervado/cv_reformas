@@ -17,6 +17,7 @@ import {
   subMonths,
   subDays,
   addDays,
+  isSameDay,
 } from 'date-fns';
 
 import {
@@ -65,21 +66,6 @@ export default function SimpleDatePicker({ placeholderText }) {
     setNewDate(addMonths(date, 1));
   }
 
-  function isSameDate(date1, date2) {
-    const year1 = getYear(date1);
-    const year2 = getYear(date2);
-    const mounth1 = getMonth(date1);
-    const mounth2 = getMonth(date2);
-    const day1 = getDate(date1);
-    const day2 = getDate(date2);
-
-    let result = false;
-    result = year1 === year2 ? 1 : 0;
-    result = mounth1 === mounth2 ? 1 : 0;
-    result = day1 === day2 ? 1 : 0;
-
-    return result;
-  }
   useEffect(() => {
     let index = 0;
     const days = [];
@@ -170,7 +156,7 @@ export default function SimpleDatePicker({ placeholderText }) {
                   disabled={
                     !(item > today) || getMonth(item) !== getMonth(date)
                   }
-                  selected={isSameDate(item, selectedDate) ? 1 : 0}
+                  selected={isSameDay(item, selectedDate) ? 1 : 0}
                   onClick={() => {
                     setVisible(false);
                     setSelectedDate(item);

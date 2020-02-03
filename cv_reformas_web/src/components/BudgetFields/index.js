@@ -1,9 +1,7 @@
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/no-unused-prop-types */
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { subDays } from 'date-fns';
-import pt from 'date-fns/locale/pt';
 
 import SimpleDatePicker from '~/components/SimpleDatePicker';
 
@@ -11,8 +9,6 @@ import { Container, Input, TextArea, InputArea } from './styles';
 import DropdownMenu from '../DropdownMenu';
 
 export default function BudgetFields() {
-  const [newdate, setNewDate] = useState('');
-
   return (
     <Container>
       <InputArea>
@@ -61,12 +57,7 @@ export default function BudgetFields() {
           shk={1}
           grow={0}
           name="date"
-          dateFormat="dd 'de' MMMM'"
-          placeholderText="Para quando você quer"
-          minDate={subDays(new Date(), 0)}
-          locale={pt}
-          selected={newdate}
-          onChange={date => setNewDate(date)}
+          placeholderText="Para quando você quer?"
         />
       </InputArea>
     </Container>
