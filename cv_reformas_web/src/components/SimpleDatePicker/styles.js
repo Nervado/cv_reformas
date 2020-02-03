@@ -42,16 +42,18 @@ export const Title = styled.div`
 
 export const List = styled.div`
   position: absolute;
-  z-index: 10;
+  z-index: 1;
   margin-top: 10px;
 
-  width: 220px;
-  height: 250px;
+  border-bottom: 1px solid #df7e38;
+  border-left: 1px solid #df7e38;
+  border-right: 1px solid #df7e38;
+
+  width: 225px;
+  height: 285px;
   background-color: #fff;
   list-style: none;
   display: ${props => (props.visible ? 'block' : 'none')};
-
-  flex-direction: column;
 
   &::before {
     content: '';
@@ -118,11 +120,12 @@ export const HeaderCalendar = styled.div`
 
 export const HeaderBody = styled.div`
   background-color: #fff;
+
   width: 100%;
   display: flex;
-  align-items: center;
   justify-content: flex-start;
-  align-content: center;
+  align-items: center;
+  padding: 0 5px 0 5px;
   flex-wrap: wrap;
   font-size: 1.2em;
 

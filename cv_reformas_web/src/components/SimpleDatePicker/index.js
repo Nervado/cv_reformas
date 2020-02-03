@@ -117,7 +117,13 @@ export default function SimpleDatePicker({ placeholderText }) {
           </span>
         </Title>
       </Header>
-      <List visible={visible} onMouseLeave={() => setVisible(false)}>
+      <List
+        visible={visible}
+        onMouseLeave={() => {
+          setVisible(false);
+          setNewDate(selectedDate);
+        }}
+      >
         <HeaderCalendar>
           <div className="year-wrapper">
             <FaChevronLeft
