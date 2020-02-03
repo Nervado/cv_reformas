@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import {
   FaRegCalendarCheck,
   FaRegCalendar,
@@ -18,7 +18,10 @@ import {
   subDays,
   addDays,
   isSameDay,
+  format,
 } from 'date-fns';
+
+import pt from 'date-fns/locale/pt';
 
 import {
   Container,
@@ -66,6 +69,10 @@ export default function SimpleDatePicker({ placeholderText }) {
     setNewDate(addMonths(date, 1));
   }
 
+  const dateFormatted = useMemo(
+    () => format(date, "d 'de' MMMM 'de' yyyy", { locale: pt }),
+    [date],
+  );
   useEffect(() => {
     let index = 0;
     const days = [];
@@ -101,17 +108,17 @@ export default function SimpleDatePicker({ placeholderText }) {
   }, [date]);
 
   return (
-    <Container>
+    <Container
+      onMouseLeave={() => {
+        setVisible(false);
+      }}
+    >
       <Header>
         <Title
           onClick={() => setVisible(!visible)}
           selected={selectedDate > today ? 1 : 0}
         >
-          <span>
-            {selectedDate > today
-              ? getDate(selectedDate).toString()
-              : placeholderText}
-          </span>
+          <span>{selectedDate > today ? dateFormatted : placeholderText}</span>
           <span style={{ color: '#df7e38' }}>
             {selectedDate > today ? <FaRegCalendarCheck /> : <FaRegCalendar />}
           </span>
