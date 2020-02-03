@@ -29,8 +29,8 @@ export const Header = styled.div`
 `;
 
 export const Title = styled.div`
-  opacity: ${props => (props.selected.length ? 1 : 0.8)};
-  color: ${props => (props.selected.length ? '#000000' : '#707070')};
+  opacity: ${props => (props.selected ? 1 : 0.8)};
+  color: ${props => (props.selected ? '#000000' : '#707070')};
 
   cursor: pointer;
   width: 100%;
@@ -43,54 +43,116 @@ export const Title = styled.div`
 export const List = styled.div`
   position: absolute;
   z-index: 10;
+  margin-top: 10px;
 
   width: 220px;
-  height: 100px;
+  height: 250px;
   background-color: #fff;
   list-style: none;
-  display: ${props => (props.visible ? 'flex' : 'none')};
+  display: ${props => (props.visible ? 'block' : 'none')};
 
-  flex-wrap: wrap;
-  flex-direction: row;
+  flex-direction: column;
 
-  .day {
-    display: flex;
-    align-content: right;
+  &::before {
+    content: '';
+    position: absolute;
+    right: calc(50% - 20px);
+    top: -20px;
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 20px solid #fff;
+  }
+`;
+
+export const HeaderCalendar = styled.div`
+  width: 100%;
+  height: 4em;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  background-image: linear-gradient(orange, #df7e38);
+
+  color: #fff;
+
+  .year-wrapper {
     width: 100%;
-    background-color: green;
-    position: relative;
+    height: 2em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1em;
+    padding: 0 5px 0 5px;
+    .year {
+      font-size: 1em;
+    }
+    .icon {
+      cursor: pointer;
+    }
   }
 
-  button {
-    width: 2em;
-    height: 2em;
-    background-color: yellowgreen;
-    text-align: center;
-    font-family: Helvetica, sans-serif;
-    color: #707070;
+  .week-days {
+    width: 100%;
+    font-size: 1.2em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .day-header {
+      margin: 0 1px 0 1px;
+      width: 28px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+  }
+`;
+
+export const HeaderBody = styled.div`
+  background-color: #fff;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  align-content: center;
+  flex-wrap: wrap;
+  font-size: 1.2em;
+
+  .day {
+    margin: 0 1px 0 1px;
+    width: 28px;
+    border: 2px solid #ffff;
+
     &:hover {
-      color: #df7e38;
+      border: 2px solid #df7e38;
     }
   }
 `;
 
 export const StyledButton = styled.button`
   border: none;
-  background-color: #fff;
+
   width: 100%;
   height: 30px;
-  text-align: left;
 
   font-family: Helvetica, sans-serif;
   font-size: 16px;
 
-  &:hover {
-    background-color: '#df7e38';
-  }
-`;
+  text-align: center;
+  font-family: Helvetica, sans-serif;
 
-export const HeaderCalendar = styled.div`
-  width: 100%;
-  height: 7em;
-  background-color: blue;
+  color: ${props => (props.selected ? '#df7e38' : '#707070')};
+  font-weight: ${props => (props.selected ? 'bolder' : '')};
+
+  &:hover {
+    color: #df7e38;
+  }
 `;

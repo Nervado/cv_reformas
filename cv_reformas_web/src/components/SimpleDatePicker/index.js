@@ -1,9 +1,23 @@
-/* eslint-disable no-nested-ternary */
-/* eslint-disable react/forbid-prop-types */
 import React, { useState, useEffect } from 'react';
-import { FaRegCalendarCheck, FaRegCalendar } from 'react-icons/fa';
+import {
+  FaRegCalendarCheck,
+  FaRegCalendar,
+  FaChevronLeft,
+  FaChevronRight,
+} from 'react-icons/fa';
 import PropTypes from 'prop-types';
-import { getDaysInMonth } from 'date-fns';
+import {
+  getDaysInMonth,
+  getYear,
+  getMonth,
+  getDay,
+  getDate,
+  setDate,
+  addMonths,
+  subMonths,
+  subDays,
+  addDays,
+} from 'date-fns';
 
 import {
   Container,
@@ -12,101 +26,171 @@ import {
   List,
   StyledButton,
   HeaderCalendar,
+  HeaderBody,
 } from './styles';
 
-export default function SimpleDatePicker({ list, placeholderText }) {
-  const [selected, setSelected] = useState('');
+export default function SimpleDatePicker({ placeholderText }) {
   const [visible, setVisible] = useState(false);
 
-  const [date, setDate] = useState(new Date());
+  const [date, setNewDate] = useState(new Date());
+
+  const [selectedDate, setSelectedDate] = useState(new Date());
 
   const [daysrange, setDaysrange] = useState([]);
 
-  const daysInMounth = getDaysInMonth(new Date());
+  const today = new Date();
 
-  const WEEK_DAYS = {
-    Sunday: 'S',
-    Monday: 'T',
-    Tuesday: 'Q',
-    Wednesday: 'Q',
-    Thursday: 'S',
-    Friday: 'S',
-    Saturday: 'D',
-  };
+  const weekDays = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom'];
 
-  const CALENDAR_MONTHS = {
-    January: 'Jan',
-    February: 'Fev',
-    March: 'Mar',
-    April: 'Abr',
-    May: 'Mai',
-    June: 'Jun',
-    July: 'Jul',
-    August: 'Ago',
-    September: 'Set',
-    October: 'Out',
-    November: 'Nov',
-    December: 'Dez',
-  };
+  const months = [
+    'Janeiro',
+    'Fev',
+    'Março',
+    'Abril',
+    'Maio',
+    'Junho',
+    'Julho',
+    'Agosto',
+    'Setembro',
+    'Outubro',
+    'Novembro',
+    'Dezembro',
+  ];
 
-  const CALENDAR_WEEKS = 6;
+  function handlePrevMounth() {
+    setNewDate(subMonths(date, 1));
+  }
 
-  const zeroPad = (value, length) => {
-    return `${value}`.padStart(length, '0');
-  };
+  function handleNextMounth() {
+    setNewDate(addMonths(date, 1));
+  }
 
-  const DAYS = 31;
+  function isSameDate(date1, date2) {
+    const year1 = getYear(date1);
+    const year2 = getYear(date2);
+    const mounth1 = getMonth(date1);
+    const mounth2 = getMonth(date2);
+    const day1 = getDate(date1);
+    const day2 = getDate(date2);
 
+    let result = false;
+    result = year1 === year2 ? 1 : 0;
+    result = mounth1 === mounth2 ? 1 : 0;
+    result = day1 === day2 ? 1 : 0;
+
+    return result;
+  }
   useEffect(() => {
     let index = 0;
     const days = [];
-    while (index < daysInMounth) {
-      days.push(index + 1);
+    let offset;
+
+    const initialDate = setDate(date, 1);
+    console.tron.log(initialDate);
+
+    // Recupera o dia da semana
+    offset = getDay(initialDate);
+
+    // varia de 0 até 6
+    if (offset === 0) offset = 6;
+    if (offset >= 1 && offset <= 6) offset -= 1;
+
+    while (index < offset) {
+      days.push(subDays(initialDate, 6 - index));
       index += 1;
     }
+
+    console.tron.log(days);
+    index = 0;
+    const daysInMounth = getDaysInMonth(initialDate);
+
+    while (index < daysInMounth) {
+      days.push(addDays(initialDate, index));
+      index += 1;
+    }
+
     setDaysrange([...days]);
 
-    console.log(days);
-  }, [daysInMounth]);
+    // console.tron.log(days);
+  }, [date]);
 
   return (
     <Container>
       <Header>
-        <Title onClick={() => setVisible(!visible)} selected={selected}>
-          <span>{selected.length ? selected : placeholderText}</span>
+        <Title
+          onClick={() => setVisible(!visible)}
+          selected={selectedDate > today ? 1 : 0}
+        >
+          <span>
+            {selectedDate > today
+              ? getDate(selectedDate).toString()
+              : placeholderText}
+          </span>
           <span style={{ color: '#df7e38' }}>
-            {selected.length ? <FaRegCalendarCheck /> : <FaRegCalendar />}
+            {selectedDate > today ? <FaRegCalendarCheck /> : <FaRegCalendar />}
           </span>
         </Title>
       </Header>
       <List visible={visible} onMouseLeave={() => setVisible(false)}>
-        <HeaderCalendar />
-        {daysrange.map(item => {
-          return (
-            <div className="day" key={item.toString()}>
-              <StyledButton
-                type="StyledButton"
-                onClick={() => {
-                  setSelected(item.toString());
-                  setVisible(false);
-                }}
-              >
-                {item}
-              </StyledButton>
+        <HeaderCalendar>
+          <div className="year-wrapper">
+            <FaChevronLeft
+              className="icon"
+              size={12}
+              style={{ color: '#fff' }}
+              onClick={handlePrevMounth}
+            />
+            <div className="year">
+              {months[getMonth(date)]}
+              <span> de </span>
+              {getYear(date)}
             </div>
-          );
-        })}
+            <FaChevronRight
+              className="icon"
+              size={12}
+              style={{ color: '#fff' }}
+              onClick={handleNextMounth}
+            />
+          </div>
+          <div className="week-days">
+            {weekDays.map(weekday => {
+              return (
+                <div key={weekday.toString()} className="day-header">
+                  {weekday.toString()}
+                </div>
+              );
+            })}
+          </div>
+        </HeaderCalendar>
+        <HeaderBody>
+          {daysrange.map(item => {
+            return (
+              <div className="day" key={item.toString()}>
+                <StyledButton
+                  disabled={
+                    !(item > today) || getMonth(item) !== getMonth(date)
+                  }
+                  selected={isSameDate(item, selectedDate) ? 1 : 0}
+                  onClick={() => {
+                    setVisible(false);
+                    setSelectedDate(item);
+                  }}
+                >
+                  {getMonth(item) !== getMonth(date) ? ' ' : getDate(item)}
+                </StyledButton>
+              </div>
+            );
+          })}
+        </HeaderBody>
       </List>
     </Container>
   );
 }
 
 SimpleDatePicker.propTypes = {
-  list: PropTypes.array,
   placeholderText: PropTypes.string,
 };
 
 SimpleDatePicker.defaultProps = {
-  list: [],
   placeholderText: '',
 };
