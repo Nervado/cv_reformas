@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  position: ${props => (props.spaOn ? 'absolute' : 'static')};
-  margin-top: ${props => (props.spaOn ? '700px' : '0px')};
   height: 80px;
   width: 100%;
   padding: 60px;

@@ -35,17 +35,12 @@ import {
 
 export default function SimpleDatePicker({ placeholderText }) {
   const [visible, setVisible] = useState(false);
-
   const [date, setNewDate] = useState(new Date());
-
   const [selectedDate, setSelectedDate] = useState(new Date());
-
   const [daysrange, setDaysrange] = useState([]);
 
   const today = new Date();
-
   const weekDays = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom'];
-
   const months = [
     'Janeiro',
     'Fev',
@@ -70,21 +65,19 @@ export default function SimpleDatePicker({ placeholderText }) {
   }
 
   const dateFormatted = useMemo(
-    () => format(date, "d 'de' MMMM 'de' yyyy", { locale: pt }),
-    [date],
+    () => format(selectedDate, "d 'de' MMMM 'de' yyyy", { locale: pt }),
+    [selectedDate],
   );
+
   useEffect(() => {
     let index = 0;
     const days = [];
     let offset;
 
     const initialDate = setDate(date, 1);
-    console.tron.log(initialDate);
 
-    // Recupera o dia da semana
     offset = getDay(initialDate);
 
-    // varia de 0 até 6
     if (offset === 0) offset = 6;
     if (offset >= 1 && offset <= 6) offset -= 1;
 
@@ -93,7 +86,6 @@ export default function SimpleDatePicker({ placeholderText }) {
       index += 1;
     }
 
-    console.tron.log(days);
     index = 0;
     const daysInMounth = getDaysInMonth(initialDate);
 
@@ -103,8 +95,6 @@ export default function SimpleDatePicker({ placeholderText }) {
     }
 
     setDaysrange([...days]);
-
-    // console.tron.log(days);
   }, [date]);
 
   return (

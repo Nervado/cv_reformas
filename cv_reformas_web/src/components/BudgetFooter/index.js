@@ -1,26 +1,35 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 
 import Button from '~/components/Button';
-import { setPageModeRequest } from '~/store/modules/page/actions';
 
 import { Container } from './styles';
 
-export default function BudgetFooter() {
-  const dispatch = useDispatch();
-  function handleHome() {
-    dispatch(setPageModeRequest(false));
-  }
+export default function BudgetFooter({ setFieldsProgress, fieldsProgress }) {
   return (
     <Container>
       <div>
-        <NavLink onClick={handleHome} to="/">
-          <Button text="Voltar" />
+        <NavLink to={() => (fieldsProgress ? '/budgets' : '/')}>
+          <Button onClick={() => setFieldsProgress(false)} text="Voltar" />
         </NavLink>
 
-        <Button primary text="Enviar" />
+        <Button
+          onClick={() => setFieldsProgress(true)}
+          primary
+          text="Continuar"
+        />
       </div>
     </Container>
   );
 }
+
+BudgetFooter.propTypes = {
+  setFieldsProgress: PropTypes.func,
+  fieldsProgress: PropTypes.bool,
+};
+
+BudgetFooter.defaultProps = {
+  setFieldsProgress: null,
+  fieldsProgress: false,
+};

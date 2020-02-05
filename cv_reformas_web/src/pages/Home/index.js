@@ -30,7 +30,6 @@ export default function Home() {
     <Container>
       <Header />
       <Background />
-
       <Content>
         <Lem>
           <div>

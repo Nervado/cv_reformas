@@ -1,7 +1,4 @@
-/* eslint-disable react/forbid-prop-types */
-/* eslint-disable react/no-unused-prop-types */
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import SimpleDatePicker from '~/components/SimpleDatePicker';
 
@@ -63,13 +60,3 @@ export default function BudgetFields() {
     </Container>
   );
 }
-
-BudgetFields.propTypes = {
-  value: PropTypes.object,
-  onClick: PropTypes.func,
-};
-
-BudgetFields.defaultProps = {
-  value: null,
-  onClick: null,
-};
