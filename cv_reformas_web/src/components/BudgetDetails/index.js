@@ -1,112 +1,97 @@
-import React, { useState } from 'react';
+/* eslint-disable react/jsx-props-no-spreading */
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+
+import { useFormContext } from 'react-hook-form';
 
 import cep from '~/services/cep';
 
 import { Container, Input, InputArea } from './styles';
 
-// import DropdownMenu from '../DropdownMenu';
+export default function BudgetFields({ hidden }) {
+  const [newcep, setCep] = useState('');
+  const { register, reset, methods } = useFormContext();
 
-export default function BudgetFields() {
-  const [adress, setAdress] = useState({
-    logradouro: '',
-    cep: '',
-    bairro: '',
-    cidade: '',
-    uf: '',
-  });
+  useEffect(() => {
+    async function handleChangeCep() {
+      const validate = /^[0-9]{8}$/;
 
-  const [CEP, setCEP] = useState('');
-  const [logradouro, setLogradouro] = useState('');
-  const [bairro, setBairro] = useState('');
-  const [numero, setNumero] = useState('');
-  const [cidade, setCidade] = useState('');
-  const [uf, setUf] = useState('');
+      if (!validate.test(newcep)) return;
 
-  function handleChangeCep() {
-    const validate = /^[0-9]{8}$/;
-
-    if (validate.test(CEP)) {
-      cep.get(`/${CEP}/json`).then(
-        response => {
-          if (response.data.erro) {
-            setCEP('Cep Inválido');
-          } else {
-            setLogradouro('');
-            setBairro('');
-            setAdress(response.data);
-          }
-        },
-        error => {
-          setLogradouro('');
-          setBairro('');
-          setCEP('Cep Inválido');
-          return error;
-        },
-      );
-    } else {
-      setCEP('Cep Inválido');
+      try {
+        const { data } = await cep.get(`/${newcep}/json`);
+        if (data.erro) {
+          reset({ cep: 'Cep inválido' });
+        } else {
+          reset({
+            cep: data.cep,
+            city: data.localidade,
+            streetName: data.logradouro,
+            fu: data.uf,
+            neighborhood: data.bairro,
+          });
+        }
+      } catch (error) {
+        reset({ cep: 'Cep inválido' });
+      }
     }
-  }
+
+    handleChangeCep();
+  }, [newcep, reset]);
 
   return (
-    <Container>
+    <Container hidden={hidden} {...methods}>
       <div>
         <h1>Localização da obra ou instalação:</h1>
       </div>
       <InputArea>
         <Input
-          value={CEP || adress.cep}
-          onChange={e => setCEP(e.target.value)}
+          ref={register}
           shk={4}
           width="50px"
-          type="text"
+          name="cep"
           placeholder="CEP"
-          onBlur={handleChangeCep}
+          onBlur={e => setCep(e.target.value)}
         />
         <Input
-          onChange={e => setLogradouro(e.target.value)}
+          ref={register}
           shk={1}
           grow={1}
           width="250px"
-          type="text"
+          name="streetName"
           placeholder="Nome da rua"
-          value={logradouro || adress.logradouro}
         />
         <Input
-          value={numero}
-          onChange={e => setNumero(e.target.value)}
+          ref={register}
           shk={5}
           grow={0}
           width="50px"
-          type="text"
+          name="houseNumber"
           placeholder="numero"
         />
         <Input
-          onChange={e => setBairro(e.target.value)}
+          ref={register}
           shk={0}
           grow={0}
           width="50px"
-          type="text"
+          name="neighborhood"
           placeholder="Bairro"
-          value={bairro || adress.bairro}
         />
         <Input
-          onChange={e => setCidade(e.target.value)}
+          ref={register}
           shk={0}
           grow={1}
           width="50px"
-          type="text"
+          name="city"
           placeholder="Cidade"
-          value={cidade || adress.localidade}
         />
         <Input
-          onChange={e => setUf(e.target.value)}
+          ref={register}
           shk={0}
           grow={0}
           width="50px"
-          type="text"
+          name="fu"
           placeholder="UF"
-          value={uf || adress.uf}
         />
       </InputArea>
 
@@ -117,78 +102,86 @@ export default function BudgetFields() {
       </div>
       <InputArea>
         <Input
-          onChange={e => setCidade(e.target.value)}
+          ref={register}
           shk={0}
           grow={1}
           width="50px"
-          type="text"
+          name="numberOfFloors"
           placeholder="Numero de pavimentos"
         />
         <Input
-          onChange={e => setUf(e.target.value)}
+          ref={register}
           shk={0}
           grow={1}
           width="50px"
-          type="text"
+          name="numberOfRooms"
           placeholder="Número de comodos"
         />
         <Input
-          onChange={e => setUf(e.target.value)}
+          ref={register}
           shk={0}
           grow={1}
           width="50px"
-          type="text"
+          name="hight"
           placeholder="Altura"
         />
         <Input
-          onChange={e => setCidade(e.target.value)}
+          ref={register}
           shk={0}
           grow={1}
           width="50px"
-          type="text"
+          name="width"
           placeholder="Largura"
         />
         <Input
-          onChange={e => setUf(e.target.value)}
+          ref={register}
           shk={0}
           grow={1}
           width="50px"
-          type="text"
+          name="deepness"
           placeholder="Profundidade"
         />
         <Input
-          onChange={e => setUf(e.target.value)}
+          ref={register}
           shk={0}
           grow={1}
           width="50px"
-          type="text"
+          name="numberOflights"
           placeholder="Número de pontos de luz"
         />
         <Input
-          onChange={e => setUf(e.target.value)}
+          ref={register}
           shk={0}
           grow={1}
           width="50px"
-          type="text"
+          name="numberOfWalls"
           placeholder="Número de paredes"
         />
         <Input
-          onChange={e => setUf(e.target.value)}
+          ref={register}
           shk={0}
           grow={1}
           width="50px"
-          type="text"
+          name="numberOfDoors"
           placeholder="Número de portas"
         />
         <Input
-          onChange={e => setUf(e.target.value)}
+          ref={register}
           shk={0}
           grow={1}
           width="50px"
-          type="text"
+          name="numberOfWindows"
           placeholder="Número de janelas"
         />
       </InputArea>
     </Container>
   );
 }
+
+BudgetFields.propTypes = {
+  hidden: PropTypes.bool,
+};
+
+BudgetFields.defaultProps = {
+  hidden: true,
+};

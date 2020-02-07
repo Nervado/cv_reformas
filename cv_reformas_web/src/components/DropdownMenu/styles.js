@@ -38,6 +38,10 @@ export const Title = styled.div`
 
   justify-content: space-between;
   align-items: center;
+
+  .category {
+    display: nome;
+  }
 `;
 
 export const List = styled.ul`

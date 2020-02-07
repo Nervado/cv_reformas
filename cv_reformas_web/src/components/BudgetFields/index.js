@@ -1,33 +1,54 @@
+/* eslint-disable react/forbid-prop-types */
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
+import PropTypes from 'prop-types';
+
+import { useFormContext, Controller } from 'react-hook-form';
 
 import SimpleDatePicker from '~/components/SimpleDatePicker';
 
 import { Container, Input, TextArea, InputArea } from './styles';
 import DropdownMenu from '../DropdownMenu';
 
-export default function BudgetFields() {
+export default function BudgetFields({ hidden }) {
+  const { register, methods } = useFormContext();
   return (
-    <Container>
+    <Container hidden={hidden} {...methods}>
       <InputArea>
-        <Input shk={0} width="150px" type="text" placeholder="Seu nome" />
         <Input
+          ref={register}
+          shk={0}
+          width="150px"
+          name="name"
+          placeholder="Seu nome"
+        />
+        <Input
+          ref={register}
           shk={0}
           grow={1}
           width="300px"
-          type="text"
+          name="surname"
           placeholder="Seu sobrenome"
         />
         <Input
+          ref={register}
           shk={0}
           grow={1}
           width="300px"
-          type="text"
+          name="email"
           placeholder="Seu email"
         />
-        <Input shk={0} width="200px" type="text" placeholder="Seu telefone" />
+        <Input
+          ref={register}
+          shk={0}
+          width="200px"
+          placeholder="Seu telefone"
+          name="phoneNumber"
+        />
       </InputArea>
       <TextArea>
         <textarea
+          ref={register}
           name="description"
           id="1"
           cols="30"
@@ -36,7 +57,13 @@ export default function BudgetFields() {
         />
       </TextArea>
       <InputArea>
-        <DropdownMenu
+        <Controller
+          as={<DropdownMenu />}
+          name="category"
+          onChange={selected => {
+            return selected;
+          }}
+          defaultValue=""
           className="dropdown"
           width={150}
           shk={1}
@@ -49,14 +76,31 @@ export default function BudgetFields() {
             'Rebaixamento de Gesso',
           ]}
         />
-        <SimpleDatePicker
+        <Controller
+          name="date"
+          as={<SimpleDatePicker />}
+          onChange={date => {
+            return date;
+          }}
+          defaultValue=""
           width={150}
           shk={1}
           grow={0}
-          name="date"
           placeholderText="Para quando você quer?"
         />
       </InputArea>
     </Container>
   );
 }
+
+BudgetFields.propTypes = {
+  hidden: PropTypes.bool,
+  setDate: PropTypes.func,
+  date: PropTypes.any,
+};
+
+BudgetFields.defaultProps = {
+  hidden: true,
+  setDate: null,
+  date: {},
+};

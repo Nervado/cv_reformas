@@ -17,6 +17,10 @@ export const Container = styled.div`
   vertical-align: center;
 
   overflow-wrap: wrap;
+
+  .selected-date {
+    display: none;
+  }
 `;
 
 export const Header = styled.div`

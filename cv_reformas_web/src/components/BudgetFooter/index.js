@@ -1,4 +1,5 @@
 import React from 'react';
+
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 
@@ -11,13 +12,18 @@ export default function BudgetFooter({ setFieldsProgress, fieldsProgress }) {
     <Container>
       <div>
         <NavLink to={() => (fieldsProgress ? '/budgets' : '/')}>
-          <Button onClick={() => setFieldsProgress(false)} text="Voltar" />
+          <Button
+            onClick={() => setFieldsProgress(false)}
+            type="submit"
+            text={fieldsProgress ? 'Voltar' : 'Inicio'}
+          />
         </NavLink>
 
         <Button
           onClick={() => setFieldsProgress(true)}
           primary
-          text="Continuar"
+          type="submit"
+          text={fieldsProgress ? 'Enviar' : 'Continuar'}
         />
       </div>
     </Container>

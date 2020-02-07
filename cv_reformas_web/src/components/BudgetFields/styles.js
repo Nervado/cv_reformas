@@ -4,7 +4,7 @@ export const Container = styled.div`
   margin-top: 10px;
   width: 100%;
   height: 100%;
-  display: flex;
+  display: ${props => (props.hidden ? 'none' : 'flex')};
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
@@ -42,6 +42,8 @@ export const InputArea = styled.div`
 export const Input = styled.input.attrs(props => ({
   type: 'text',
   placeholder: props.placeholder,
+  value: props.value,
+  name: props.name,
 }))`
   height: 50px;
 

@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-export const Container = styled.form`
+export const Container = styled.div`
   margin-top: 10px;
   width: 100%;
   height: 100%;
-  display: flex;
+  display: ${props => (props.hidden ? 'none' : 'flex')};
   flex-direction: column;
   align-items: center;
   justify-content: space-between;

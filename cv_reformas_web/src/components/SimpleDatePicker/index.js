@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
+
 import {
   FaRegCalendarCheck,
   FaRegCalendar,
@@ -33,7 +34,7 @@ import {
   HeaderBody,
 } from './styles';
 
-export default function SimpleDatePicker({ placeholderText }) {
+export default function SimpleDatePicker({ placeholderText, onChange }) {
   const [visible, setVisible] = useState(false);
   const [date, setNewDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -163,6 +164,7 @@ export default function SimpleDatePicker({ placeholderText }) {
                   onClick={() => {
                     setVisible(false);
                     setSelectedDate(item);
+                    onChange(item);
                   }}
                 >
                   {getMonth(item) !== getMonth(date) ? ' ' : getDate(item)}
@@ -178,8 +180,10 @@ export default function SimpleDatePicker({ placeholderText }) {
 
 SimpleDatePicker.propTypes = {
   placeholderText: PropTypes.string,
+  onChange: PropTypes.func,
 };
 
 SimpleDatePicker.defaultProps = {
   placeholderText: '',
+  onChange: null,
 };
