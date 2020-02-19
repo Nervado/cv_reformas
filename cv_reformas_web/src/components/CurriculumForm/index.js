@@ -9,7 +9,7 @@ import logo from '~/assets/logo.svg';
 import AvatarInput from '../AvatarInput';
 
 import CurriculumFields from '../CurriculumFields';
-import BudgetFooter from '../BudgetFooter';
+import CurriculumFooter from '../CurriculumFooter';
 
 export default function CurriculumForm() {
   const methods = useForm();
@@ -27,7 +27,7 @@ export default function CurriculumForm() {
         </NavLink>
         <AvatarInput />
         <CurriculumFields />
-        <BudgetFooter />
+        <CurriculumFooter />
       </Container>
     </FormContext>
   );
