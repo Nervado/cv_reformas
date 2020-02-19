@@ -5,7 +5,8 @@ import Route from './routes';
 import Home from '../pages/Home';
 import Professionals from '~/pages/Professionals';
 import AvaliableServices from '~/pages/AvailableServices';
-import Budgets from '~/pages/Budgets';
+import Budget from '~/pages/Budget';
+import Curriculum from '~/pages/Curriculum';
 
 export default function Routes() {
   return (
@@ -13,7 +14,8 @@ export default function Routes() {
       <Route path="/" exact component={Home} />
       <Route path="/professionals" component={Professionals} />
       <Route path="/services" component={AvaliableServices} />
-      <Route path="/budgets" component={Budgets} />
+      <Route path="/budgets" component={Budget} />
+      <Route path="/curriculum" component={Curriculum} />
     </Switch>
   );
 }

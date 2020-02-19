@@ -20,7 +20,7 @@ export default function Menu() {
       </StyledNavLink>
       <StyledNavLink to="/">Contato</StyledNavLink>
       <StyledNavLink to="/professionals">Profissionais</StyledNavLink>
-      <StyledNavLink to="/">Trabalhe conosco</StyledNavLink>
+      <StyledNavLink to="/curriculum">Trabalhe conosco</StyledNavLink>
     </Container>
   );
 }

@@ -9,7 +9,7 @@ import cep from '~/services/cep';
 import { Container, Input, InputArea } from './styles';
 
 export default function BudgetFields({ hidden }) {
-  const [newcep, setCep] = useState('');
+  const [newcep, setCep] = useState('     -   ');
   const { register, reset, methods } = useFormContext();
 
   useEffect(() => {

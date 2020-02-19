@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 import { Container, Header, Title, List, StyledButton } from './styles';
 
-export default function DropdownMenu({ list, onChange }) {
+export default function DropdownMenu({ list, onChange, placeholder }) {
   const [selected, setSelected] = useState('');
   const [visible, setVisible] = useState(false);
 
@@ -14,7 +14,7 @@ export default function DropdownMenu({ list, onChange }) {
     <Container>
       <Header>
         <Title onClick={() => setVisible(!visible)} selected={selected}>
-          <span>{selected.length ? selected : 'Selecione uma categoria'}</span>
+          <span>{selected.length ? selected : placeholder}</span>
           <span style={{ color: '#df7e38' }}>
             {visible ? <FaAngleUp /> : <FaAngleDown />}
           </span>
@@ -45,9 +45,11 @@ export default function DropdownMenu({ list, onChange }) {
 DropdownMenu.propTypes = {
   list: PropTypes.array,
   onChange: PropTypes.func,
+  placeholder: PropTypes.string,
 };
 
 DropdownMenu.defaultProps = {
   list: [],
   onChange: null,
+  placeholder: 'Selecione uma categoria',
 };

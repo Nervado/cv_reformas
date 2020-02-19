@@ -25,11 +25,6 @@ export default function RouterWrapper({
     return <Redirect to="/dashboard" />;
   }
 
-  // seleciona um status da pagina
-  // const { mode } = store.getState().page;
-
-  // const loading = useSelector(state => state..loading);
-
   const Layout = signed ? DefaultLayout : DefaultLayout;
 
   return (
