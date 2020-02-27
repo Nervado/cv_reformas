@@ -7,6 +7,7 @@ import Professionals from '~/pages/Professionals';
 import AvaliableServices from '~/pages/AvailableServices';
 import Budget from '~/pages/Budget';
 import Curriculum from '~/pages/Curriculum';
+import Contact from '~/pages/Contact';
 
 export default function Routes() {
   return (
@@ -16,6 +17,7 @@ export default function Routes() {
       <Route path="/services" component={AvaliableServices} />
       <Route path="/budgets" component={Budget} />
       <Route path="/curriculum" component={Curriculum} />
+      <Route path="/contact" component={Contact} />
     </Switch>
   );
 }
