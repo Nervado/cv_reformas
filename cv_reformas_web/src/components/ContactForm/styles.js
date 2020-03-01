@@ -89,4 +89,27 @@ export const StyledPicker = styled.div`
   vertical-align: center;
 `;
 
+export const TextArea = styled.div`
+  margin-top: 5px;
+  height: 200px;
+  width: 100%;
+
+  padding: 0 5px 0 5px;
+  textarea {
+    padding: 5px;
+    border: none;
+    width: 100%;
+    height: 100%;
+    box-shadow: 2px 2px 3px 1px #df7e38;
+    font-family: Helvetica, sans-serif;
+
+    color: #000000;
+
+    font-size: 18px;
+    &::text {
+      opacity: 0.8;
+      color: #707070;
+    }
+  }
+`;
 //

@@ -15,7 +15,7 @@ export default function CurriculumForm() {
   const methods = useForm();
 
   const onSubmit = data => {
-    console.log(data);
+    // console.log(data);
     return data;
   };
 

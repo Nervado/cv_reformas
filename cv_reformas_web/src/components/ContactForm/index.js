@@ -1,16 +1,15 @@
-/* eslint-disable react/forbid-prop-types */
-/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 
 import { FormContext, useForm } from 'react-hook-form';
 
-import { Container, Input, InputArea } from './styles';
+import Button from '../Button';
+import { Container, Input, InputArea, TextArea } from './styles';
 
 export default function ContactForm() {
   const { register, handleSubmit } = useForm();
 
   const onSubmit = data => {
-    console.log(data);
+    // console.log(data);
     return data;
   };
 
@@ -21,17 +20,10 @@ export default function ContactForm() {
           <Input
             ref={register}
             shk={0}
-            width="150px"
-            name="name"
-            placeholder="Seu nome"
-          />
-          <Input
-            ref={register}
-            shk={0}
             grow={1}
             width="300px"
-            name="surname"
-            placeholder="Seu sobrenome"
+            name="name"
+            placeholder="Seu nome"
           />
           <Input
             ref={register}
@@ -45,20 +37,21 @@ export default function ContactForm() {
             ref={register}
             shk={0}
             width="200px"
-            placeholder="Seu cpf"
+            placeholder="Seu telefone"
             name="phoneNumber"
           />
-
-          <Input
-            ref={register}
-            shk={1}
-            grow={1}
-            width="250px"
-            name="streetName"
-            placeholder="Nome da rua"
-          />
         </InputArea>
-        <button type="submit">Enviar</button>
+        <TextArea>
+          <textarea
+            ref={register}
+            name="description"
+            id="1"
+            cols="30"
+            rows="10"
+            placeholder="Descreva aqui sua mensagem..."
+          />
+        </TextArea>
+        <Button text="Enviar" primary />
       </Container>
     </FormContext>
   );
