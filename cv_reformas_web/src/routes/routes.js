@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
+import ReactGA from 'react-ga';
 // import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
@@ -26,6 +27,18 @@ export default function RouterWrapper({
   }
 
   const Layout = signed ? DefaultLayout : DefaultLayout;
+
+  // GA
+
+  const trackingId = 'G-CB4KQ4MS85'; // Replace with your Google Analytics tracking ID
+
+  ReactGA.initialize(trackingId);
+
+  ReactGA.set({
+    userId: 'teste',
+    // any data that is relevant to the user session
+    // that you would like to track with google analytics
+  });
 
   return (
     <Route
