@@ -1,6 +1,9 @@
+
 <p align="center">
   <a href="http://34s0ft.com/" target="blank"><img src="./src/assets/34s0ft.svg" width="420" alt="34s0ft Logo" /></a>
 </p>
+
+![Node.js CI](https://github.com/Nervado/cv_reformas/workflows/Node.js%20CI/badge.svg)
 
 ## Description
 
