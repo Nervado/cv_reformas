@@ -16,8 +16,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm instal  
-      - run: npm build              
+      - run: npm install  
+      - run: npm build  
+      - run: npm test              
         working-directory: ./cv_reformas_web
         env:
           CI: true
