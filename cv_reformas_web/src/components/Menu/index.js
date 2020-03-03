@@ -24,4 +24,5 @@ export default function Menu() {
     </Container>
   );
 }
+
 // <StyledNavLink to="/professionals">Profissionais</StyledNavLink>
