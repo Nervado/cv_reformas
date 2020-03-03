@@ -152,6 +152,7 @@ export const StyledButton = styled.button`
 
   font-family: Helvetica, sans-serif;
   font-size: 16px;
+  background-color: #fff;
 
   text-align: center;
   font-family: Helvetica, sans-serif;
