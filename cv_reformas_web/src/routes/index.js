@@ -2,10 +2,7 @@ import React from 'react';
 import { Switch } from 'react-router-dom';
 
 import Route from './routes';
-<<<<<<< HEAD
 
-=======
->>>>>>> 8089f3e26173962339fc1bee3dba0f2803b8cd80
 import SignUp from '../pages/SignUp';
 import Home from '../pages/Home';
 import Professionals from '~/pages/Professionals';
@@ -13,10 +10,7 @@ import AvaliableServices from '~/pages/AvailableServices';
 import Budget from '~/pages/Budget';
 import Curriculum from '~/pages/Curriculum';
 import Contact from '~/pages/Contact';
-<<<<<<< HEAD
-=======
 
->>>>>>> 8089f3e26173962339fc1bee3dba0f2803b8cd80
 import SignIn from '../pages/SignIn';
 
 export default function Routes() {
