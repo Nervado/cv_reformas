@@ -7,14 +7,14 @@ import { setPageModeRequest } from '~/store/modules/page/actions';
 
 import { Container } from './styles';
 
-export default function Background({ logged, spaOn, form }) {
+export default function Background({ logged, spaOn }) {
   const dispatch = useDispatch();
   function handleClick() {
     dispatch(setPageModeRequest(true));
   }
   // /onClick={handleHome}
   return (
-    <Container form={form} logged={logged ? 1 : 0} spaOn={spaOn ? 1 : 0}>
+    <Container logged={logged ? 1 : 0} spaOn={spaOn ? 1 : 0}>
       <img alt="" />
       <div className="wrapper-primary">
         <NavLink onClick={handleClick} to="/budgets">
@@ -36,11 +36,9 @@ export default function Background({ logged, spaOn, form }) {
 Background.propTypes = {
   logged: PropTypes.bool,
   spaOn: PropTypes.bool,
-  form: PropTypes.bool,
 };
 
 Background.defaultProps = {
   logged: false,
   spaOn: false,
-  form: false,
 };
