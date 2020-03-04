@@ -6,6 +6,7 @@ import { ToastContainer } from 'react-toastify';
 // configs do reactotron sempre antes das rotas
 import './config/ReactotronConfig';
 import Routes from './routes';
+
 import history from './services/history';
 
 import { store, persistor } from './store/index';
