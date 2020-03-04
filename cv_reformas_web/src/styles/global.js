@@ -22,13 +22,10 @@ export default createGlobalStyle`
   }
 
   body , html, #root {
-    height: 2700px;
+
     width: 100%;
     z-index: 0;
-
-    height: ${props => (props.spaOn ? '860px' : '2700px')};
-    height: ${props => (props.formOn ? '860px' : '')};
-
+    height: 860px;
 
 }
 

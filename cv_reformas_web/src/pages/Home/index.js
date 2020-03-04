@@ -7,6 +7,7 @@ import Header from '~/components/Header';
 import Footer from '~/components/Footer';
 
 import Background from '~/components/Background';
+import GlobalStyle from '../../styles/global';
 
 import job from '~/assets/job.svg';
 import mang from '~/assets/mang.svg';
@@ -28,6 +29,7 @@ export default function Home() {
 
   return (
     <Container>
+      <GlobalStyle spaOn />
       <Header />
       <Background />
       <Content>

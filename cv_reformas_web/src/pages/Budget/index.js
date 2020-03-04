@@ -10,7 +10,7 @@ import Footer from '~/components/Footer';
 export default function Budget() {
   return (
     <Container>
-      <GlobalStyle formOn />
+      <GlobalStyle spaOn />
       <BudgetForm />
       <Footer />
     </Container>
