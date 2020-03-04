@@ -8,6 +8,8 @@ import AvaliableServices from '~/pages/AvailableServices';
 import Budget from '~/pages/Budget';
 import Curriculum from '~/pages/Curriculum';
 import Contact from '~/pages/Contact';
+import SignUp from '~/pages/SignUp';
+import SignIn from '~/pages/SignIn';
 
 export default function Routes() {
   return (
@@ -15,6 +17,8 @@ export default function Routes() {
       <Route path="/" exact component={Home} />
       <Route path="/professionals" component={Professionals} />
       <Route path="/services" component={AvaliableServices} />
+      <Route path="/signup" component={SignUp} />
+      <Route path="/signin" component={SignIn} />
       <Route path="/budgets" component={Budget} />
       <Route path="/curriculum" component={Curriculum} />
       <Route path="/contact" component={Contact} />

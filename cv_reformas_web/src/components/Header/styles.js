@@ -39,33 +39,28 @@ export const Content = styled.div`
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        button {
-          height: 31px;
-          width: 121px;
-
-          border: none;
-
-          margin-right: 10px;
-          background: #df7e38;
-          color: #fff;
-          font-size: 20px;
-
-          border-radius: 4px;
-
-          font-display: 'Helvetica';
-
-          text-align: center;
-        }
-
-        button:nth-child(2) {
-          background: #707070;
-          margin-right: 0;
-        }
-
-        button:hover {
-          opacity: 0.6;
-        }
       }
     }
+  }
+`;
+
+export const StyledButton = styled.button`
+  height: 40px;
+  width: 120px;
+
+  border: none;
+
+  background-color: ${props => (props.primary ? '#df7e38' : '#707070')};
+
+  color: #fff;
+  font-size: 20px;
+  border-radius: 4px;
+
+  font-family: Helvetica, sans-serif;
+
+  margin: 5px 5px 5px 5px;
+
+  &:hover {
+    opacity: 0.6;
   }
 `;

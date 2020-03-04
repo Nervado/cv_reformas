@@ -32,7 +32,8 @@ export default createGlobalStyle`
 body::after {
   content: "";
   background: url(${background});
-  opacity: 0.2;
+
+  opacity: ${props => (props.opctMax ? 1 : 0.2)};
   top: 150px;
   top: ${props => (props.spaOn ? '150px' : '0px')};
   left: 0;
@@ -42,8 +43,9 @@ body::after {
   z-index: -1;
 }
 
-  body {
+  body,html,#root {
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   body, input, button {

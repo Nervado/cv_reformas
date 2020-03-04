@@ -20,7 +20,7 @@ import {
   StyledButton,
 } from './styles';
 
-export default function SignUp() {
+export default function SignIn() {
   // const dispatch = useDispatch();
 
   const { register, handleSubmit } = useForm();
@@ -44,13 +44,6 @@ export default function SignUp() {
                 ref={register}
                 shk={0}
                 width="300px"
-                name="name"
-                placeholder="Seu nome"
-              />
-              <Input
-                ref={register}
-                shk={0}
-                width="300px"
                 name="email"
                 placeholder="Seu email"
               />
@@ -62,20 +55,11 @@ export default function SignUp() {
                 name="password"
                 type="password"
               />
-              <Input
-                ref={register}
-                shk={0}
-                width="300px"
-                placeholder="Confirme sua senha"
-                name="confirmPassword"
-                type="password"
-              />
             </InputArea>
 
-            <StyledButton primary>Enviar</StyledButton>
-
-            <NavLink to="/signin">
-              <StyledButton>Já tenho cadastro</StyledButton>
+            <StyledButton primary>Entrar</StyledButton>
+            <NavLink to="/signup">
+              <StyledButton>Quero me Cadastrar!</StyledButton>
             </NavLink>
           </Form>
         </FormContext>

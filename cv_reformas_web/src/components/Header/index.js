@@ -12,7 +12,7 @@ import logo from '~/assets/logo.svg';
 
 import Menu from '~/components/Menu';
 
-import { Container, Content } from './styles';
+import { Container, Content, StyledButton } from './styles';
 
 export default function Header() {
   // const profile = useSelector(state => state.user.profile);
@@ -37,10 +37,11 @@ export default function Header() {
           <div>
             <div>
               <NavLink onClick={handleClick} to="/budgets">
-                <button type="button">Orçamento</button>
+                <StyledButton primary>Orçamento</StyledButton>
               </NavLink>
-
-              <button type="button">Login</button>
+              <NavLink to="/signin">
+                <StyledButton>Login</StyledButton>
+              </NavLink>
             </div>
             <Menu />
           </div>

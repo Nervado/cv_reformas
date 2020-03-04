@@ -12,6 +12,10 @@ export const Container = styled.div`
 
   overflow: hidden;
 
+  .wrapper-primary {
+    display: ${props => (props.form ? 'none' : '')};
+  }
+
   img {
     margin-top: -10px;
     position: absolute;

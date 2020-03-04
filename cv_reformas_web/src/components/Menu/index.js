@@ -15,7 +15,7 @@ export default function Menu() {
     <Container>
       <StyledNavLink to="/">Home</StyledNavLink>
       <StyledNavLink to="/services">Serviços</StyledNavLink>
-      <StyledNavLink onClick={handleClick} to="/">
+      <StyledNavLink onClick={handleClick} to="/signup">
         Cadastre-se
       </StyledNavLink>
       <StyledNavLink to="/contact">Contato</StyledNavLink>
