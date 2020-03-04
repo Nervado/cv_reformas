@@ -2,13 +2,14 @@ import React from 'react';
 import { Switch } from 'react-router-dom';
 
 import Route from './routes';
+import SignUp from '../pages/SignUp';
 import Home from '../pages/Home';
 import Professionals from '~/pages/Professionals';
 import AvaliableServices from '~/pages/AvailableServices';
 import Budget from '~/pages/Budget';
 import Curriculum from '~/pages/Curriculum';
 import Contact from '~/pages/Contact';
-import SignUp from '../pages/SignUp';
+
 import SignIn from '../pages/SignIn';
 
 export default function Routes() {
