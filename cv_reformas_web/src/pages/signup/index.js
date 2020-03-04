@@ -2,10 +2,6 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { FormContext, useForm } from 'react-hook-form';
 
-// import { useDispatch } from 'react-redux';
-
-// import { setPageModeRequest } from '~/store/modules/page/actions';
-
 import Footer from '~/components/Footer';
 
 import GlobalStyle from '../../styles/global';
