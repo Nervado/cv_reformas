@@ -45,7 +45,7 @@ export const Content = styled.div`
 `;
 
 export const StyledButton = styled.button`
-  height: 40px;
+  height: 30px;
   width: 120px;
 
   border: none;
