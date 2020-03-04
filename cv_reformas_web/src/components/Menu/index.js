@@ -19,7 +19,6 @@ export default function Menu() {
         Cadastre-se
       </StyledNavLink>
       <StyledNavLink to="/contact">Contato</StyledNavLink>
-
       <StyledNavLink to="/curriculum">Trabalhe conosco</StyledNavLink>
     </Container>
   );
