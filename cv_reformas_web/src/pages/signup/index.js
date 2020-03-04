@@ -67,9 +67,7 @@ export default function SignUp() {
                 type="password"
               />
             </InputArea>
-
             <StyledButton primary>Enviar</StyledButton>
-
             <NavLink to="/signin">
               <StyledButton>Já tenho cadastro</StyledButton>
             </NavLink>

@@ -8,8 +8,8 @@ import AvaliableServices from '~/pages/AvailableServices';
 import Budget from '~/pages/Budget';
 import Curriculum from '~/pages/Curriculum';
 import Contact from '~/pages/Contact';
-import SignUp from '~/pages/SignUp';
-import SignIn from '~/pages/SignIn';
+import SignUp from '../pages/SignUp';
+import SignIn from '../pages/SignIn';
 
 export default function Routes() {
   return (
