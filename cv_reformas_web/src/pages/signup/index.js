@@ -75,7 +75,6 @@ export default function SignUp() {
             </NavLink>
           </Form>
         </FormContext>
-
         <Footer />
       </Content>
     </Container>

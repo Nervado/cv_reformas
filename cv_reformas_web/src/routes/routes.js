@@ -1,9 +1,9 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { Route } from 'react-router-dom';
 import ReactGA from 'react-ga';
 // import { useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
 
 // Import Layouts
 // import AdminLayout from '~/components/Layouts/Admin';
@@ -14,17 +14,10 @@ import { store } from '~/store/index';
 
 export default function RouterWrapper({
   component: Component,
-  isPrivate = false,
+
   ...rest
 }) {
   const { signed } = store.getState().auth;
-
-  if (!signed && isPrivate) {
-    return <Redirect to="/" />;
-  }
-  if (signed && !isPrivate) {
-    return <Redirect to="/dashboard" />;
-  }
 
   const Layout = signed ? DefaultLayout : DefaultLayout;
 
