@@ -1,9 +1,9 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
+import { Route, Redirect } from 'react-router-dom';
 import ReactGA from 'react-ga';
 // import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Route, Redirect } from 'react-router-dom';
 
 // Import Layouts
 // import AdminLayout from '~/components/Layouts/Admin';

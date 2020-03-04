@@ -63,7 +63,6 @@ export default function SignIn() {
             </NavLink>
           </Form>
         </FormContext>
-
         <Footer />
       </Content>
     </Container>
