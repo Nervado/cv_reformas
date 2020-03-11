@@ -10,11 +10,13 @@ export const Container = styled.div`
 
 export const StyledNavLink = styled(NavLink)`
   color: #707070;
-  font-size: 24px;
+  font-size: 20px;
   text-decoration: none;
-  font-family: 'Helvetica';
+  font-family: Helvetica;
+
   cursor: pointer;
   &:hover {
     opacity: 0.7;
+    color: #df7e38;
   }
 `;

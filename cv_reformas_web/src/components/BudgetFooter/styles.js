@@ -4,7 +4,7 @@ export const Container = styled.div`
   margin-top: 10px;
   margin-bottom: 10px;
   width: 100%;
-  height: 130px;
+  height: 90px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -18,5 +18,9 @@ export const Container = styled.div`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+  }
+
+  .button-back {
+    display: ${props => (props.logged ? 'none' : '')};
   }
 `;

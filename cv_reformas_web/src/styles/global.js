@@ -34,13 +34,16 @@ body::after {
   background: url(${background});
 
   opacity: ${props => (props.opctMax ? 1 : 0.2)};
-  top: 150px;
+
   top: ${props => (props.spaOn ? '150px' : '0px')};
   left: 0;
   bottom: 0;
   right: 0;
   position: absolute;
   z-index: -1;
+  width: 100%;
+  height:100%;
+
 }
 
   body,html,#root {

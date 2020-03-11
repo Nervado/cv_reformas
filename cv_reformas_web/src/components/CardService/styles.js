@@ -13,6 +13,7 @@ export const Container = styled.div`
   flex-direction: column;
 
   align-items: center;
+  border-radius: 4px;
 `;
 
 export const Text = styled.div`
@@ -36,7 +37,7 @@ export const Img = styled.div`
   height: 300px;
 
   img {
-    border-radius: 10px 10px 10px 10px;
+    border-radius: 4px 4px 4px 4px;
     width: 100%;
     height: 100%;
   }

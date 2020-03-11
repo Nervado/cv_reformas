@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  display: ${props => (props.hide ? 'none' : '')};
   button {
     height: 31px;
     width: 121px;

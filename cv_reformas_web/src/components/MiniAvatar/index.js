@@ -6,6 +6,7 @@ export default function MiniAvatar() {
   return (
     <Container>
       <img alt="" />
+      <span className="name">Camila</span>
     </Container>
   );
 }

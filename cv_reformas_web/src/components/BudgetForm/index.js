@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState } from 'react';
 import { useForm, FormContext } from 'react-hook-form';
@@ -14,6 +15,7 @@ export default function BudgetForm() {
   const methods = useForm();
 
   const onSubmit = data => {
+    console.log(data);
     return data;
   };
 

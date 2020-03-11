@@ -7,6 +7,8 @@ export const Container = styled.li`
   box-shadow: 4px 4px 5px #707070;
 
   background-color: #fff;
+
+  border-radius: 4px;
 `;
 
 export const Content = styled.div`
@@ -21,13 +23,18 @@ export const Content = styled.div`
 `;
 
 export const Text = styled.div`
-  height: 100%;
-  width: 60%;
+  height: 90%;
+  width: 70%;
   display: flex;
   align-items: center;
   text-align: left;
+  overflow: hidden;
+  padding: 10px;
 
   span {
     width: 100%;
+    text-align: left;
+
+    color: #707070;
   }
 `;

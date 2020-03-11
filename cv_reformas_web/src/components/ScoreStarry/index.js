@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 
-import { FaStarHalfAlt, FaStar, FaBriefcase } from 'react-icons/fa';
+import { FaStarHalfAlt, FaStar, FaBriefcase, FaRegStar } from 'react-icons/fa';
 
 import { AiOutlineTeam } from 'react-icons/ai';
 
@@ -8,25 +9,28 @@ import { MdEventAvailable } from 'react-icons/md';
 import PropTypes from 'prop-types';
 import { Container, Resume, Stars } from './styles';
 
-export default function ScoreStarry({ rating }) {
-  const [rat, setRat] = useState(0);
+const fullStar = <FaStar color="#df7e38" className="star" />;
+const halfStar = <FaStarHalfAlt color="#df7e38" className="star" />;
+const emptyStar = <FaRegStar color="#df7e38" className="star" />;
 
-  const [half, setHalf] = useState(false);
-
+export default function ScoreStarry({ rating, hide, handleHover, id }) {
+  const [rat, setRat] = useState(rating);
   const [stars, setStars] = useState([]);
 
   useEffect(() => {
     setRat(rating.toFixed(1));
 
     function calcRating() {
-      const newStars = [];
+      const _stars = [];
+      let flagHalf = false;
       let round = Math.floor(rating);
+      let emptyNum = 5;
 
       setStars([]);
-      setHalf(false);
 
       if (rating - round >= 0.5 && rating - round < 0.9) {
-        setHalf(true);
+        emptyNum -= 1;
+        flagHalf = true;
       }
 
       if (rating - round >= 0.9) {
@@ -36,11 +40,22 @@ export default function ScoreStarry({ rating }) {
 
       let i = 1;
       while (i <= round) {
-        newStars.push(i);
+        _stars.push(fullStar);
+        emptyNum -= 1;
         i += 1;
       }
 
-      setStars([...newStars]);
+      if (flagHalf) {
+        _stars.push(halfStar);
+        emptyNum -= 1;
+      }
+
+      while (emptyNum > 0) {
+        _stars.push(emptyStar);
+        emptyNum -= 1;
+      }
+
+      setStars([..._stars]);
     }
 
     calcRating();
@@ -50,42 +65,31 @@ export default function ScoreStarry({ rating }) {
     <Container>
       <Stars>
         <ul>
-          {stars.map(index => {
-            return (
-              <li key={index}>
-                <FaStar style={{ color: '#df7e38' }} />
-              </li>
-            );
-          })}
-          {half ? (
-            <li>
-              <FaStarHalfAlt style={{ color: '#df7e38' }} />
+          {stars.map((star, i) => (
+            <li key={`${i + 1}`} onMouseEnter={() => handleHover(id, i + 1)}>
+              <span>{star}</span>
             </li>
-          ) : (
-            ''
-          )}
+          ))}
         </ul>
-        <div>
+        <div className="rat">
           <span>{rat}</span>
         </div>
       </Stars>
-      <Resume>
-        <div>
-          <div>
-            <FaBriefcase style={{ color: '#BC3A3A' }} />
-            <span>Participações 42</span>
+      <Resume hide={hide}>
+        <div className="add-info">
+          <div className="info">
+            <FaBriefcase color="green" />
+            <span>Projetos: 42</span>
           </div>
 
-          <div>
-            <AiOutlineTeam style={{ color: '#1A46A8' }} />
-            <span>Equipes 7</span>
+          <div className="info">
+            <AiOutlineTeam color="green" />
+            <span>Equipes: 7</span>
           </div>
 
-          <div>
-            <MdEventAvailable style={{ color: '#6BAA34' }} />
-            <span style={{ color: '#6BAA34', fontWeight: 'bold' }}>
-              Disponível
-            </span>
+          <div className="info">
+            <MdEventAvailable color="green" />
+            <span>Disponível</span>
           </div>
         </div>
       </Resume>
@@ -95,8 +99,45 @@ export default function ScoreStarry({ rating }) {
 
 ScoreStarry.propTypes = {
   rating: PropTypes.number,
+  hide: PropTypes.bool,
+  handleHover: PropTypes.func,
+  id: PropTypes.number,
 };
 
 ScoreStarry.defaultProps = {
-  rating: 5,
+  rating: 3,
+  hide: false,
+  handleHover: () => {},
+  id: 0,
 };
+
+/***
+ *
+ *
+ *  {stars.map(index => {
+            return (
+              <li key={index}>
+                <span onMouseEnter={() => handleHover(id + 1, id + 1)}>
+                  <FaStar color="#df7e38" className="star" />
+                </span>
+              </li>
+            );
+          })}
+          {half ? (
+            <li>
+              <span>
+                <FaStarHalfAlt color="#df7e38" className="star" />
+              </span>
+            </li>
+          ) : (
+            ''
+          )}
+          {emptyStars.map(i => (
+            <li key={i}>
+              <span>
+                <FaRegStar color="#df7e38" className="star" />
+              </span>
+            </li>
+          ))}
+
+ */

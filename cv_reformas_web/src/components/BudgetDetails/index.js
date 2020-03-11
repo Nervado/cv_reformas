@@ -104,7 +104,7 @@ export default function BudgetFields({ hidden }) {
         <Input
           ref={register}
           shk={0}
-          grow={1}
+          grow={0}
           width="50px"
           name="numberOfFloors"
           placeholder="Numero de pavimentos"
@@ -112,7 +112,7 @@ export default function BudgetFields({ hidden }) {
         <Input
           ref={register}
           shk={0}
-          grow={1}
+          grow={0}
           width="50px"
           name="numberOfRooms"
           placeholder="Número de comodos"
@@ -120,7 +120,7 @@ export default function BudgetFields({ hidden }) {
         <Input
           ref={register}
           shk={0}
-          grow={1}
+          grow={0}
           width="50px"
           name="hight"
           placeholder="Altura"
@@ -128,7 +128,7 @@ export default function BudgetFields({ hidden }) {
         <Input
           ref={register}
           shk={0}
-          grow={1}
+          grow={0}
           width="50px"
           name="width"
           placeholder="Largura"
@@ -136,7 +136,7 @@ export default function BudgetFields({ hidden }) {
         <Input
           ref={register}
           shk={0}
-          grow={1}
+          grow={0}
           width="50px"
           name="deepness"
           placeholder="Profundidade"
@@ -144,7 +144,7 @@ export default function BudgetFields({ hidden }) {
         <Input
           ref={register}
           shk={0}
-          grow={1}
+          grow={0}
           width="50px"
           name="numberOflights"
           placeholder="Número de pontos de luz"
@@ -152,7 +152,7 @@ export default function BudgetFields({ hidden }) {
         <Input
           ref={register}
           shk={0}
-          grow={1}
+          grow={0}
           width="50px"
           name="numberOfWalls"
           placeholder="Número de paredes"
@@ -160,7 +160,7 @@ export default function BudgetFields({ hidden }) {
         <Input
           ref={register}
           shk={0}
-          grow={1}
+          grow={0}
           width="50px"
           name="numberOfDoors"
           placeholder="Número de portas"
@@ -168,7 +168,7 @@ export default function BudgetFields({ hidden }) {
         <Input
           ref={register}
           shk={0}
-          grow={1}
+          grow={0}
           width="50px"
           name="numberOfWindows"
           placeholder="Número de janelas"

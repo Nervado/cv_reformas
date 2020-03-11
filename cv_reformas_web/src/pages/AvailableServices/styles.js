@@ -2,13 +2,12 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
-  height: 75%;
+  height: 100%;
 `;
 
 export const Content = styled.div`
-  margin-top: 10px;
   width: 100%;
-  height: 100%;
+  height: 75%;
 
   display: flex;
   flex-direction: column;

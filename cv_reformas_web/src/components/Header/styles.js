@@ -5,19 +5,22 @@ export const Container = styled.div`
   background: #fcfcfc;
   z-index: 1;
   width: 100%;
+
+  box-shadow: 4px 4px 4px rgba(112, 112, 112, 0.4);
 `;
 
 export const Content = styled.div`
   width: 100%;
 
-  background: #fcfcfc;
+  background-color: rgba(112, 112, 112, 0.05);
+
   height: 150px;
-  width: 100%;
+
   margin: 0 auto;
 
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
 
   nav {
     height: 100px;

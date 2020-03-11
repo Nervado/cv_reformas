@@ -10,7 +10,7 @@ import { Container, Content, Title } from './styles';
 export default function AvailableServices() {
   return (
     <Container>
-      <GlobalStyle spaOn />
+      <GlobalStyle />
       <Header />
       <Content>
         <Title>

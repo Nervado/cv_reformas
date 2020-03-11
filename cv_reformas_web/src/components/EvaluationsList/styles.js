@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   height: 100%;
-  width: 30%;
+  width: 100%;
 `;
 
 export const Content = styled.div`
@@ -36,5 +36,5 @@ export const Title = styled.h1`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
 `;

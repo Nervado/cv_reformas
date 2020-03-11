@@ -8,6 +8,7 @@ export const Container = styled.div`
 `;
 
 export const Form = styled.form`
+  background-color: #fff;
   margin-top: 10%;
   width: 350px;
   height: 500px;
@@ -17,10 +18,10 @@ export const Form = styled.form`
   align-items: center;
   justify-content: center;
 
-  background-color: #fff;
-
   opacity: 0.92;
   border-radius: 4px;
+
+  box-shadow: 4px 4px 4px rgba(112, 112, 112, 0.8);
 `;
 
 export const Content = styled.div`
@@ -92,3 +93,7 @@ export const StyledButton = styled.button`
     opacity: 0.6;
   }
 `;
+
+// background: #F2994A;  /* fallback for old browsers */
+// background: -webkit-linear-gradient(to top, #F2C94C, #F2994A);  /* Chrome 10-25, Safari 5.1-6 */
+// background: linear-gradient(to top, #F2C94C, #F2994A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */

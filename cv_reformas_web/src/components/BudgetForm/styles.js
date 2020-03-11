@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.form`
-  width: 50%;
+  width: 700px;
 
   font-family: Helvetica, sans-serif;
 
@@ -15,4 +15,6 @@ export const Container = styled.form`
 
   background-color: #fff;
   justify-content: space-between;
+
+  border-radius: 4px;
 `;

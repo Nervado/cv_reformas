@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  background-color: #fff;
   margin-top: 5px;
   margin-left: 5px;
   margin-right: 5px;
@@ -46,7 +47,7 @@ export const Title = styled.div`
 
 export const List = styled.div`
   position: absolute;
-  z-index: 1;
+  z-index: 10;
   margin-top: 10px;
 
   border-bottom: 1px solid #df7e38;

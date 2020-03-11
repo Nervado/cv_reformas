@@ -7,11 +7,20 @@ import Button from '~/components/Button';
 
 import { Container } from './styles';
 
-export default function BudgetFooter({ setFieldsProgress, fieldsProgress }) {
+export default function BudgetFooter({
+  setFieldsProgress,
+  fieldsProgress,
+  logged,
+}) {
+  const route = logged ? '/dashboard' : '/budgets';
+
   return (
-    <Container>
+    <Container logged={logged && !fieldsProgress}>
       <div>
-        <NavLink to={() => (fieldsProgress ? '/budgets' : '/')}>
+        <NavLink
+          className="button-back"
+          to={() => (fieldsProgress ? route : '/')}
+        >
           <Button
             onClick={() => setFieldsProgress(false)}
             type="submit"
@@ -33,9 +42,11 @@ export default function BudgetFooter({ setFieldsProgress, fieldsProgress }) {
 BudgetFooter.propTypes = {
   setFieldsProgress: PropTypes.func,
   fieldsProgress: PropTypes.bool,
+  logged: PropTypes.bool,
 };
 
 BudgetFooter.defaultProps = {
   setFieldsProgress: null,
   fieldsProgress: false,
+  logged: false,
 };

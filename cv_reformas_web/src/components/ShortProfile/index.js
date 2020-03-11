@@ -14,7 +14,7 @@ export default function ShortProfile() {
       <Content>
         <MiniAvatarRound />
         <Skills />
-        <ScoreStarry rating={4.6} />
+        <ScoreStarry rating={3.6} />
       </Content>
     </Container>
   );
