@@ -29,6 +29,7 @@ import DashboardFrame from '~/components/DashboardFrame';
 import EvaluationView from '~/components/EvaluationView';
 
 import { Container, Content, AsideMenu, BodyContent, Avatar } from './styles';
+import Search from '~/components/Search';
 
 const data = [
   {
@@ -298,18 +299,8 @@ export default function Dashboard() {
   }
 
   const [child, setChild] = useState(
-    <DashboardFrame type="budgetView" data={data[0]}>
-      <EvaluationView
-        team={[
-          { id: 1, job: 'Eletricista', name: 'José do Patrocinio' },
-          { id: 22, job: 'Engenheiro', name: 'João da Perimetral' },
-          { id: 47, job: 'Pedreiro', name: 'Paulo Pedregoso' },
-        ]}
-        project={{
-          id: 1,
-          title: 'Reforma da suite  com instalação de banheira ',
-        }}
-      />
+    <DashboardFrame data={data[0]}>
+      <Search />
     </DashboardFrame>,
   );
 
@@ -439,7 +430,61 @@ export default function Dashboard() {
               <FaUsers className="icon" />
               <span>Profissionais</span>
             </button>
-            <button type="button" onClick={() => setChild(<EvaluationsList />)}>
+            <button
+              type="button"
+              onClick={() =>
+                setChild(
+                  <EvaluationsList
+                    onClick={() =>
+                      setChild(
+                        <DashboardFrame type="budgetView" data={data[0]}>
+                          <EvaluationView
+                            team={[
+                              {
+                                id: 1,
+                                job: 'Eletricista',
+                                name: 'José do Patrocinio',
+                                ratting: 0,
+                              },
+                              {
+                                id: 22,
+                                job: 'Engenheiro',
+                                name: 'João da Perimetral',
+                                ratting: 0,
+                              },
+                              {
+                                id: 49,
+                                job: 'Pedreiro',
+                                name: 'Paulo Pedregoso',
+                                ratting: 0,
+                              },
+                              {
+                                id: 48,
+                                job: 'Pedreiro',
+                                name: 'Pedrosa Pedregulho',
+                                ratting: 0,
+                              },
+                              {
+                                id: 47,
+                                job: 'Pedreiro',
+                                name: 'Lucas Negão',
+                                ratting: 0,
+                              },
+                            ]}
+                            project={{
+                              id: 1,
+                              title:
+                                'Reforma da suite  com instalação de banheira ',
+                            }}
+                            goBack={() => setChild(<EvaluationsList />)}
+                          />
+                        </DashboardFrame>,
+                      )
+                    }
+                  />,
+                )
+              }
+            >
               <MdPerson className="icon" />
               <span>Avaliações</span>
             </button>

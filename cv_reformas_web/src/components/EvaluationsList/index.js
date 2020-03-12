@@ -4,20 +4,20 @@ import ShortEvaluation from '~/components/ShortEvaluation';
 
 import { Container, Content, Title } from './styles';
 
-export default function EvaluationsList() {
+export default function EvaluationsList({ onClick }) {
   return (
     <Container>
       <Content>
         <Title>Avaliações</Title>
         <ul>
-          <ShortEvaluation />
-          <ShortEvaluation />
-          <ShortEvaluation />
-          <ShortEvaluation />
-          <ShortEvaluation />
-          <ShortEvaluation />
-          <ShortEvaluation />
-          <ShortEvaluation />
+          <ShortEvaluation onClick={onClick} />
+          <ShortEvaluation onClick={onClick} />
+          <ShortEvaluation onClick={onClick} />
+          <ShortEvaluation onClick={onClick} />
+          <ShortEvaluation onClick={onClick} />
+          <ShortEvaluation onClick={onClick} />
+          <ShortEvaluation onClick={onClick} />
+          <ShortEvaluation onClick={onClick} />
         </ul>
       </Content>
     </Container>

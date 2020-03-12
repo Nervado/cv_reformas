@@ -6,9 +6,9 @@ import MiniAvatar from '~/components/MiniAvatar';
 
 import Score from '~/components/Score';
 
-export default function ShortEvaluation() {
+export default function ShortEvaluation({ onClick }) {
   return (
-    <Container>
+    <Container onClick={onClick}>
       <Content>
         <MiniAvatar />
         <Text>

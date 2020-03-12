@@ -13,8 +13,15 @@ const fullStar = <FaStar color="#df7e38" className="star" />;
 const halfStar = <FaStarHalfAlt color="#df7e38" className="star" />;
 const emptyStar = <FaRegStar color="#df7e38" className="star" />;
 
-export default function ScoreStarry({ rating, hide, handleHover, id }) {
-  const [rat, setRat] = useState(rating);
+export default function ScoreStarry({
+  rating,
+  hide,
+  id,
+  handleClick,
+  handleClickTopic,
+}) {
+  const [rat, setRat] = useState(0);
+
   const [stars, setStars] = useState([]);
 
   useEffect(() => {
@@ -47,7 +54,6 @@ export default function ScoreStarry({ rating, hide, handleHover, id }) {
 
       if (flagHalf) {
         _stars.push(halfStar);
-        emptyNum -= 1;
       }
 
       while (emptyNum > 0) {
@@ -66,8 +72,14 @@ export default function ScoreStarry({ rating, hide, handleHover, id }) {
       <Stars>
         <ul>
           {stars.map((star, i) => (
-            <li key={`${i + 1}`} onMouseEnter={() => handleHover(id, i + 1)}>
-              <span>{star}</span>
+            <li key={`${i + 1}`} onClickCapture={() => handleClick(id, i + 1)}>
+              <span
+                onClickCapture={() => {
+                  handleClickTopic(id, i + 1);
+                }}
+              >
+                {star}
+              </span>
             </li>
           ))}
         </ul>
@@ -100,44 +112,15 @@ export default function ScoreStarry({ rating, hide, handleHover, id }) {
 ScoreStarry.propTypes = {
   rating: PropTypes.number,
   hide: PropTypes.bool,
-  handleHover: PropTypes.func,
+  handleClick: PropTypes.func,
+  handleClickTopic: PropTypes.func,
   id: PropTypes.number,
 };
 
 ScoreStarry.defaultProps = {
-  rating: 3,
+  rating: 5,
   hide: false,
-  handleHover: () => {},
+  handleClick: () => {},
+  handleClickTopic: () => {},
   id: 0,
 };
-
-/***
- *
- *
- *  {stars.map(index => {
-            return (
-              <li key={index}>
-                <span onMouseEnter={() => handleHover(id + 1, id + 1)}>
-                  <FaStar color="#df7e38" className="star" />
-                </span>
-              </li>
-            );
-          })}
-          {half ? (
-            <li>
-              <span>
-                <FaStarHalfAlt color="#df7e38" className="star" />
-              </span>
-            </li>
-          ) : (
-            ''
-          )}
-          {emptyStars.map(i => (
-            <li key={i}>
-              <span>
-                <FaRegStar color="#df7e38" className="star" />
-              </span>
-            </li>
-          ))}
-
- */

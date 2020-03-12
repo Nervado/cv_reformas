@@ -33,6 +33,7 @@ export const Header = styled.div`
   padding: 2px;
 
   .header-wrapper {
+    height: 50px;
     width: 100%;
     padding: 5px 10px 5px 10px;
     display: flex;
@@ -58,23 +59,23 @@ export const Header = styled.div`
 `;
 export const Body = styled.div`
   width: 100%;
-
-  height: 80%;
+  height: 350px;
 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+
   /**atencao */
-  margin: 5px;
-  padding: 10px;
 
   .rattings {
-    height: 230px;
+    height: 270px;
+    overflow-y: scroll;
+
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 
     color: #707070;
@@ -91,6 +92,7 @@ export const Body = styled.div`
       display: flex;
       align-items: center;
       justify-content: space-between;
+      padding: 0px 10px 0px 10px;
 
       .starry {
         border: 1px solid #fff;
@@ -111,8 +113,10 @@ export const Body = styled.div`
     display: flex;
     flex-direction: column;
 
+    padding: 5px 10px 0px 10px;
+
     .label {
-      margin-top: 10px;
+      height: 20px;
       color: #707070;
       font-size: 14px;
     }

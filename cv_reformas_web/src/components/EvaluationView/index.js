@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { FaStar, FaUser, FaCoins, FaUsers, FaTrash } from 'react-icons/fa';
 import { MdTimer, MdSend } from 'react-icons/md';
+import { IoMdReturnLeft } from 'react-icons/io';
 
 import { GiLifeBar } from 'react-icons/gi';
 
@@ -22,50 +23,68 @@ const icons = [
 const _ratting = {
   projectId: 1,
   team: [
-    { id: 1, ratting: 2.1 },
-    { id: 1, ratting: 4.6 },
-    { id: 1, ratting: 4.4 },
-    { id: 1, ratting: 4.99 },
-    { id: 1, ratting: 4.9 },
+    { id: 23, job: 'Eletricista', name: 'José do Patrocinio', ratting: 0 },
+    { id: 22, job: 'Engenheiro', name: 'João da Perimetral', ratting: 0 },
+    { id: 49, job: 'Pedreiro', name: 'Paulo Pedregoso', ratting: 0 },
+    { id: 48, job: 'Pedreiro', name: 'Pedrosa Pedregulho', ratting: 0 },
+    { id: 47, job: 'Pedreiro', name: 'Lucas Negão', ratting: 0 },
   ],
-  topics: {
-    general: 4,
-    price: 4,
-    goal: 5,
-    quality: 4,
-  },
-  overall: 1,
+  topics: [
+    { id: 1, name: 'general', value: 0 },
+    { id: 2, name: 'price', value: 0 },
+    { id: 3, name: 'goal', value: 0 },
+    { id: 4, name: 'quality', value: 0 },
+  ],
+  overall: 5,
   opinion: 'Bla bla bla bla bla bla bla bla bla',
 };
 
-const _rattingTeam = [
-  { id: 1, ratting: 2.1 },
-  { id: 2, ratting: 4.6 },
-  { id: 3, ratting: 4.4 },
-  { id: 4, ratting: 4.99 },
-  { id: 5, ratting: 4.9 },
-];
-
-export default function EvaluationView({ team, project }) {
+export default function EvaluationView({
+  goBack = () => {},
+  team,
+  project,
+  topics = [
+    { id: 1, name: 'general', value: 0 },
+    { id: 2, name: 'price', value: 0 },
+    { id: 3, name: 'goal', value: 0 },
+    { id: 4, name: 'quality', value: 0 },
+  ],
+}) {
   const [ratting, setRatting] = useState(_ratting);
-  const [rattingTeam, setRattingTeam] = useState(_rattingTeam);
+  const [rattingTeam, setRattingTeam] = useState(team);
+  const [rattingTopic, setRattingTopic] = useState(topics);
 
-  function handleHover(id, rating) {
-    // let index = 0;
+  function evaluateTotal() {
+    const a = rattingTeam.reduce((b, c) => c.ratting + b, 0);
+
+    const d = rattingTopic.reduce((b, c) => c.value + b, 0);
+    const _overall = (a + d) / (rattingTopic.length + rattingTeam.length);
+    const _ratt = ratting;
+    _ratt.overall = _overall;
+    setRatting({ ..._ratt });
+  }
+
+  function handleClick(id, rating) {
     const search = rattingTeam.map(item => {
       if (item.id === id) {
-        // index = i;
         item.ratting = rating;
       }
 
       return item;
     });
 
-    // search[index].ratting = rating;
-
     setRattingTeam([...search]);
 
-    console.log([...search]);
+    evaluateTotal();
+  }
+
+  function handleClickTopic(index, rating) {
+    const search = rattingTopic;
+    search[index].value = rating;
+
+    setRattingTopic([...search]);
+
+    evaluateTotal();
   }
 
   return (
@@ -82,14 +101,14 @@ export default function EvaluationView({ team, project }) {
               <span>
                 <FaStar />
               </span>
-              <span>{ratting.overall}</span>
+              <span>{ratting.overall.toFixed(1)}</span>
             </div>
           </div>
         </Header>
 
         <Body>
           <div className="rattings">
-            {team.map((member, i) => (
+            {rattingTeam.map((member, i) => (
               <div className="team" key={member.name}>
                 <div>
                   <span className="icon">
@@ -104,20 +123,25 @@ export default function EvaluationView({ team, project }) {
                     hide
                     rating={rattingTeam[i].ratting}
                     className="starry-score"
-                    handleHover={handleHover}
+                    handleClick={handleClick}
                     id={rattingTeam[i].id}
                   />
                 </div>
               </div>
             ))}
-            {icons.map(topic => (
-              <div className="ratting" key={topic.topic}>
+            {rattingTopic.map((topic, i) => (
+              <div className="ratting" key={icons[i].topic}>
                 <div className="rat">
-                  <span className="icon">{topic.icon}</span>
-                  <span> {topic.topic}</span>
+                  <span className="icon">{icons[i].icon}</span>
+                  <span> {icons[i].topic}</span>
                 </div>
                 <div className="starry">
-                  <ScoreStarry hide />
+                  <ScoreStarry
+                    hide
+                    rating={topic.value}
+                    handleClickTopic={handleClickTopic}
+                    id={i}
+                  />
                 </div>
               </div>
             ))}
@@ -134,6 +158,10 @@ export default function EvaluationView({ team, project }) {
             <button type="button">
               <MdSend className="icon" />
               Enviar
+            </button>
+            <button type="button" onClick={goBack}>
+              <IoMdReturnLeft className="icon" />
+              Voltar
             </button>
             <button type="button">
               <FaTrash className="icon" color={rgba(0, 0, 0, 0.6)} /> Limpar
