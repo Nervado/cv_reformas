@@ -28,8 +28,12 @@ import DashboardFrame from '~/components/DashboardFrame';
 
 import EvaluationView from '~/components/EvaluationView';
 
+// import RingLoading from '~/components/RingLoading';
+import ChartArea from '~/components/ChartArea';
+
 import { Container, Content, AsideMenu, BodyContent, Avatar } from './styles';
-import Search from '~/components/Search';
+
+// import Search from '~/components/Search';
 
 const data = [
   {
@@ -300,7 +304,7 @@ export default function Dashboard() {
 
   const [child, setChild] = useState(
     <DashboardFrame data={data[0]}>
-      <Search />
+      <ChartArea />
     </DashboardFrame>,
   );
 

@@ -213,11 +213,12 @@ export const Team = styled.div`
         align-items: center;
         justify-content: space-between;
         color: '#df7e38';
+
         span {
           margin: 2px 4px 2px 4px;
           color: #df7e38;
           font-size: 20px;
-          font-weight: bold;
+          font-weight: bolder;
         }
       }
     }
@@ -275,13 +276,5 @@ export const Footer = styled.div`
   }
   .secondary {
     background-color: #707070;
-  }
-`;
-
-export const Icon = styled.div`
-  cursor: pointer;
-
-  &:hover {
-    opacity: 0.6;
   }
 `;
