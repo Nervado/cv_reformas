@@ -45,6 +45,8 @@ export const Content = styled.div`
     font-family: Helvetica, sans-serif;
     font-weight: bold;
 
+    text-shadow: 2px 3px 4px rgba(112, 112, 112, 0.2);
+
     display: flex;
     align-items: center;
     justify-content: center;

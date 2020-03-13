@@ -12,6 +12,22 @@ export default function ChartArea() {
           radius={100}
           stroke={10}
           progress={Math.random() * 100}
+          color="#6A3BC3"
+        />
+      </ChartCard>
+      <ChartCard>
+        <RingLoading
+          radius={100}
+          stroke={10}
+          progress={Math.random() * 100}
+          color="#3B99C3"
+        />
+      </ChartCard>
+      <ChartCard>
+        <RingLoading
+          radius={100}
+          stroke={10}
+          progress={Math.random() * 100}
           color="#24B498"
         />
       </ChartCard>

@@ -21,7 +21,7 @@ export default function RingLoading({ radius, stroke, progress, color }) {
           <circle
             className="progress-ring__circle"
             stroke={`${color}`}
-            fill="transparent"
+            fill="rgba(112,112,112,0.03)"
             strokeWidth={20}
             strokeDasharray={(circumference, circumference)}
             r={normalizedRadius}
