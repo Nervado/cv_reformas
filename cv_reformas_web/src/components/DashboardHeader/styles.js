@@ -24,7 +24,7 @@ export const Container = styled.div`
       align-items: center;
       justify-content: space-between;
       padding: 5px 2px 5px 2px;
-      /**#DE2929  #3B99C3 #DDDD51 #24B498*/
+      /**#B42493  #3B99C3 #DDDD51 #24B498*/
 
       position: relative;
 
@@ -40,22 +40,22 @@ export const Container = styled.div`
       }
 
       .data-1 {
-        color: #de2929;
+        color: ${props => props.colors[0]};
         font-weight: bold;
         font-size: 20px;
       }
       .data-2 {
-        color: #3b99c3;
+        color: ${props => props.colors[1]};
         font-weight: bold;
         font-size: 20px;
       }
       .data-3 {
-        color: #dddd51;
+        color: ${props => props.colors[2]};
         font-weight: bold;
         font-size: 20px;
       }
       .data-4 {
-        color: #24b498;
+        color: ${props => props.colors[3]};
         font-weight: bold;
         font-size: 20px;
       }

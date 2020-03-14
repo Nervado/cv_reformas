@@ -23,5 +23,5 @@ export const ChartCard = styled.div`
   width: 200px;
   height: 200px;
 
-  margin: 10px 80px 10px 80px;
+  margin: 15px 60px 10px 60px;
 `;

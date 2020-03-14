@@ -3,23 +3,43 @@
 import React from 'react';
 import { MdTimer, MdPerson } from 'react-icons/md';
 
-import { FaUsers, FaCalendar, FaInfoCircle, FaCoins } from 'react-icons/fa';
+import {
+  FaUsers,
+  FaCalendar,
+  FaInfoCircle,
+  FaCoins,
+  FaMoneyBill,
+} from 'react-icons/fa';
+import { GoProject } from 'react-icons/go';
+
+import { FiSend } from 'react-icons/fi';
 
 import DashboardHeader from '~/components/DashboardHeader';
 
 import { Container } from './styles';
 
-const size = 22;
+const size = 24;
 
 const icons = [
-  <FaUsers color="#de2929" size={size} />,
-  <MdTimer color="#3b99c3" size={size} />,
+  <FaUsers color="#B42493" size={size} />,
+  <MdTimer color="#6A3BC3" size={size} />,
+  <FaInfoCircle color="#3B99C3" size={size} />,
+  <FaCoins color="#24B498" size={size} />,
+
+  <FaCalendar color="#DE2929" size={size} />,
+  <FaInfoCircle color="#3b99c3" size={size} />,
+  <FaCalendar color="#DDDD51" size={size} />,
+  <FaInfoCircle color="#24B498" size={size} />,
+
+  <MdTimer color="#DE2929" size={size} />,
+  <FiSend color="#3B99C3" size={size} />,
   <FaInfoCircle color="#DDDD51" size={size} />,
   <FaCoins color="#24B498" size={size} />,
-  <FaUsers />,
-  <FaCalendar />,
-  <FaInfoCircle />,
-  <MdPerson />,
+
+  <MdPerson color="#B42493" size={size} />,
+  <FaCoins color="#6A3BC3" size={size} />,
+  <GoProject color="#3B99C3" size={size} />,
+  <FaMoneyBill color="#24B498" size={size} />,
 ];
 
 export default function DashboardFrame({ children, type, data }) {
@@ -59,14 +79,14 @@ export default function DashboardFrame({ children, type, data }) {
       case 'pending':
         return (
           <DashboardHeader
-            icons={[icons[0], icons[1], icons[2], icons[3]]}
+            icons={[icons[8], icons[9], icons[10], icons[11]]}
             data={[
-              `${data.teamCount}`,
-              `${data.goal} h`,
-              `${data.status}`,
-              `R$ ${data.value}`,
+              `${data.pending}`,
+              `${data.budgetCounts}`,
+              `${data.projectCounts}`,
+              `${data.effective}`,
             ]}
-            names={['Equipe', 'Prazo', 'Situação', 'Valor']}
+            names={['Pendentes', 'Enviados', 'Solicitados', 'Efetivados']}
             unreadCount={[4, 1, 4, 7]}
             hasUnread={[1, 0, 1, 1]}
           />
@@ -74,16 +94,20 @@ export default function DashboardFrame({ children, type, data }) {
       case 'general':
         return (
           <DashboardHeader
-            icons={[icons[0], icons[1], icons[2], icons[3]]}
+            icons={[icons[12], icons[13], icons[14], icons[15]]}
             data={[
-              `${data.teamCount}`,
-              `${data.goal} h`,
-              `${data.status}`,
-              `R$ ${data.value}`,
+              `${data.clients}`,
+              `${data.budgets}`,
+              `${data.projects}`,
+              `R$ ${data.value
+                .toFixed(2)
+                .toString()
+                .replace('.', ',')}`,
             ]}
-            names={['Equipe', 'Prazo', 'Situação', 'Valor']}
+            names={['Clientes', 'Orçamentos', 'Projetos', 'Faturamento']}
             unreadCount={[4, 1, 4, 7]}
             hasUnread={[1, 0, 1, 1]}
+            colors={['#B42493', '#6A3BC3', '#3B99C3', '#24B498']}
           />
         );
       default:

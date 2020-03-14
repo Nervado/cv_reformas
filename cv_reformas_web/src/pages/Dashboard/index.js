@@ -48,17 +48,18 @@ const data = [
     status: 'Atrasado', // Em tempo ou atrasado
     value: 3200.01, // Valor atual do projeto, pode ser revisto se acordado com o cliente
   },
+
   {
-    teamCount: 4, // general
-    goal: 10,
-    status: 'Atrasado',
-    value: 32000.01,
-  },
-  {
-    clientsCounts: 4, // pending
+    pending: 4, // pending
     budgetCounts: 10,
     projectCounts: 100,
     effective: 34,
+  },
+  {
+    clients: 4, // general
+    budgets: 10,
+    projects: 7,
+    value: 32000.0891,
   },
 ];
 
@@ -303,7 +304,7 @@ export default function Dashboard() {
   }
 
   const [child, setChild] = useState(
-    <DashboardFrame data={data[0]}>
+    <DashboardFrame data={data[3]} type="general">
       <ChartArea />
     </DashboardFrame>,
   );
@@ -410,7 +411,7 @@ export default function Dashboard() {
               type="button"
               onClick={() =>
                 setChild(
-                  <DashboardFrame type="budgetView" data={data[0]}>
+                  <DashboardFrame type="pending" data={data[2]}>
                     <BudgetList
                       budgets={budgets}
                       handleAccept={handleAccept}

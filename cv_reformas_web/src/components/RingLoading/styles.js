@@ -28,12 +28,29 @@ export const Content = styled.div`
 
   .progress-ring {
     .progress-ring__circle {
-      transition: stroke-dashoffset 1s;
+
+      animation: load linear normal 1s;
+
+
       transform: rotate(-90deg);
       transform-origin: 50% 50%;
-      box-shadow: 0 0 0 3px rgba(0, 0, 0, 1);
+
+    }
+    @keyframes load {
+
+      from {
+
+        stroke-dashoffset: ${props => props.strokeDashoffse};
+
+      }
+      to {
+
+        stroke-dashoffset: 0;
+      }
     }
   }
+
+  /*${props => props.strokeDashoffset / props.progress} **/
 
   .progress {
     position: absolute;

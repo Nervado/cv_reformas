@@ -10,9 +10,10 @@ export default function DashboardHeader({
   data,
   unreadCount,
   hasUnread,
+  colors = ['#DE2929', '#3b99c3', '#DDDD51', '#24B498'],
 }) {
   return (
-    <Container>
+    <Container colors={colors}>
       <div className="header-content">
         {icons.map((icon, i) => (
           <Badge

@@ -1,18 +1,31 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Container, Content } from './styles';
 
-export default function RingLoading({ radius, stroke, progress, color }) {
-  const [normalizedRadius] = useState(radius - stroke * 2);
-  const [circumference] = useState(normalizedRadius * 2 * Math.PI);
+export default function RingLoading({
+  radius,
+  stroke,
+  progress,
+  color,
+  title,
+}) {
+  const normalizedRadius = radius - stroke * 2;
+  const circumference = normalizedRadius * 2 * Math.PI;
 
-  const strokeDashoffset = circumference - (progress / 100) * circumference;
+  const [strokeDashoffset, setStrokeDashoffset] = useState(0);
+
+  useEffect(() => {
+    const _strokeDashoffset = circumference - (progress / 100) * circumference;
+    setStrokeDashoffset(_strokeDashoffset);
+  }, [circumference, progress]);
 
   return (
     <Container color={color}>
-      <h1>Projetos Concluídos</h1>
+      <h1>{title}</h1>
       <Content
+        strokeDashoffset={strokeDashoffset}
+        progress={progress}
         height={`${radius * 2 + radius / 3}px`}
         width={`${radius * 2 + radius / 3}px`}
         color={color}
@@ -22,7 +35,7 @@ export default function RingLoading({ radius, stroke, progress, color }) {
             className="progress-ring__circle"
             stroke={`${color}`}
             fill="rgba(112,112,112,0.03)"
-            strokeWidth={20}
+            strokeWidth={stroke}
             strokeDasharray={(circumference, circumference)}
             r={normalizedRadius}
             cx={radius}
