@@ -19,7 +19,7 @@ export default function BudgetFields({ hidden }) {
           ref={register}
           shk={0}
           width="150px"
-          name="name"
+          name="username"
           placeholder="Seu nome"
         />
         <Input

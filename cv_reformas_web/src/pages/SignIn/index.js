@@ -1,10 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { FormContext, useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 
-// import { useDispatch } from 'react-redux';
-
-// import { setPageModeRequest } from '~/store/modules/page/actions';
+import { signInRequest } from '~/store/modules/auth/actions';
 
 import Footer from '~/components/Footer';
 
@@ -21,13 +20,12 @@ import {
 } from './styles';
 
 export default function SignIn() {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const { register, handleSubmit } = useForm();
 
-  const onSubmit = data => {
-    // console.log(data);
-    return data;
+  const onSubmit = ({ email, password }) => {
+    dispatch(signInRequest(email, password));
   };
 
   return (

@@ -33,6 +33,8 @@ import ChartArea from '~/components/ChartArea';
 
 import { Container, Content, AsideMenu, BodyContent, Avatar } from './styles';
 
+import avatar from '~/assets/avatar.jpeg';
+
 // import Search from '~/components/Search';
 
 const data = [
@@ -376,10 +378,7 @@ export default function Dashboard() {
         <AsideMenu className="dashboard-menu" admin={admin}>
           <div className="dashboard-avatar">
             <Avatar>
-              <img
-                src="https://api.adorable.io/avatars/70/abott@adorable.png"
-                alt="avatar"
-              />
+              <img src={avatar} alt="avatar" />
             </Avatar>
             <div className="dashboard-greet">
               <span className="dashboard-msg">Boa tarde!</span>

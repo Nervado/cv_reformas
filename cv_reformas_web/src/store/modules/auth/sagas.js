@@ -1,7 +1,5 @@
 import { takeLatest, call, put, all } from 'redux-saga/effects';
-
 import { toast } from 'react-toastify';
-
 import history from '~/services/history';
 import api from '~/services/api';
 
@@ -11,7 +9,7 @@ export function* signIn({ payload }) {
   try {
     const { email, password } = payload;
 
-    const response = yield call(api.post, 'sessions', {
+    const response = yield call(api.post, '/auth/signin', {
       email,
       password,
     });
@@ -30,17 +28,20 @@ export function* signIn({ payload }) {
 
 export function* signUp({ payload }) {
   try {
-    const { name, email, password } = payload;
+    const { username, email, password, passwordConfirmation } = payload;
 
-    yield call(api.post, '/users', {
-      name,
+    yield call(api.post, '/auth/signup', {
+      username,
       email,
       password,
+      passwordConfirmation,
     });
 
     history.push('/');
   } catch (err) {
     toast.error('Falha no cadastro, verique seus dados!');
+    // console.log(err);
+
     yield put(signFailure());
   }
 }

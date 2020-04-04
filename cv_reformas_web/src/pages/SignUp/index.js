@@ -1,4 +1,6 @@
 import React from 'react';
+
+import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { FormContext, useForm } from 'react-hook-form';
 
@@ -6,6 +8,8 @@ import Footer from '~/components/Footer';
 
 import GlobalStyle from '../../styles/global';
 import logo from '~/assets/logo.svg';
+
+import { signUpRequest } from '~/store/modules/auth/actions';
 
 import {
   Container,
@@ -17,13 +21,12 @@ import {
 } from './styles';
 
 export default function SignUp() {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const { register, handleSubmit } = useForm();
 
-  const onSubmit = data => {
-    // console.log(data);
-    return data;
+  const onSubmit = ({ username, email, password, passwordConfirmation }) => {
+    dispatch(signUpRequest(username, email, password, passwordConfirmation));
   };
 
   return (
@@ -40,7 +43,7 @@ export default function SignUp() {
                 ref={register}
                 shk={0}
                 width="300px"
-                name="name"
+                name="username"
                 placeholder="Seu nome"
               />
               <Input
@@ -63,7 +66,7 @@ export default function SignUp() {
                 shk={0}
                 width="300px"
                 placeholder="Confirme sua senha"
-                name="confirmPassword"
+                name="passwordConfirmation"
                 type="password"
               />
             </InputArea>

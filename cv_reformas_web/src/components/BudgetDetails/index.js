@@ -71,6 +71,14 @@ export default function BudgetFields({ hidden }) {
         />
         <Input
           ref={register}
+          shk={5}
+          grow={0}
+          width="50px"
+          name="complement"
+          placeholder="complemento"
+        />
+        <Input
+          ref={register}
           shk={0}
           grow={0}
           width="50px"
