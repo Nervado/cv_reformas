@@ -43,7 +43,7 @@ export default function Header() {
                 <StyledButton>Login</StyledButton>
               </NavLink>
             </div>
-            <Menu logged />
+            <Menu />
           </div>
         </nav>
       </Content>
