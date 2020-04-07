@@ -2,9 +2,7 @@ import React from 'react';
 // import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 
-import { useDispatch } from 'react-redux';
-
-import { setPageModeRequest } from '~/store/modules/page/actions';
+// import { setPageModeRequest } from '~/store/modules/page/actions';
 
 // import { Link } from 'react-router-dom';
 
@@ -17,14 +15,14 @@ import { Container, Content, StyledButton } from './styles';
 export default function Header() {
   // const profile = useSelector(state => state.user.profile);
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   function handleClick() {
-    dispatch(setPageModeRequest(true));
+    //  dispatch(setPageModeRequest(true));
   }
 
   function handleHome() {
-    dispatch(setPageModeRequest(false));
+    // å dispatch(setPageModeRequest(false));
   }
   return (
     <Container>

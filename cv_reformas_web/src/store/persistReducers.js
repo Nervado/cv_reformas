@@ -5,9 +5,9 @@ import { persistReducer } from 'redux-persist';
 export default reducers => {
   const persistedReducer = persistReducer(
     {
-      key: 'meetapp',
+      key: 'cv_reformas',
       storage,
-      whitelist: ['auth', 'user', 'meetup', 'page'],
+      whitelist: ['auth', 'user', 'budgets'],
     },
     reducers,
   );

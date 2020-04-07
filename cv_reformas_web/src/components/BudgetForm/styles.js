@@ -17,4 +17,9 @@ export const Container = styled.form`
   justify-content: space-between;
 
   border-radius: 4px;
+
+  .yup-warn {
+    color: red;
+    display: block;
+  }
 `;

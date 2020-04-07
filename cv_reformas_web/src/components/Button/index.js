@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 
 import { Container } from './styles';
 
-export default function Button({ onClick, primary, text }) {
+export default function Button({ primary, text, hide, onSubmit }) {
   return (
-    <Container primary={primary ? 1 : 0}>
-      <button name={text} onClick={onClick} type="submit">
+    <Container primary={primary ? 1 : 0} hide={hide}>
+      <button name={text} onClick={onSubmit} type="submit">
         {text}
       </button>
     </Container>
@@ -17,11 +17,13 @@ export default function Button({ onClick, primary, text }) {
 Button.propTypes = {
   primary: PropTypes.bool,
   text: PropTypes.string,
-  onClick: PropTypes.func,
+  onSubmit: PropTypes.func,
+  hide: PropTypes.bool,
 };
 
 Button.defaultProps = {
   primary: false,
   text: ' ',
-  onClick: null,
+  onSubmit: null,
+  hide: false,
 };

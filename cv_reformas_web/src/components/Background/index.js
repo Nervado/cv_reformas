@@ -2,15 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 
-import { useDispatch } from 'react-redux';
-import { setPageModeRequest } from '~/store/modules/page/actions';
+// import { useDispatch } from 'react-redux';
 
 import { Container } from './styles';
 
 export default function Background({ logged, spaOn }) {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   function handleClick() {
-    dispatch(setPageModeRequest(true));
+    //  dispatch(setPageModeRequest(true));
   }
   // /onClick={handleHome}
   return (

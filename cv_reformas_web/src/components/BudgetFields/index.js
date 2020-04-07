@@ -1,19 +1,42 @@
-/* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
-import PropTypes from 'prop-types';
-
+import React, { useEffect } from 'react';
+import { MdError } from 'react-icons/md';
 import { useFormContext, Controller } from 'react-hook-form';
+// import { store } from '../../store/index';
 
+import { getValues } from '../../utils/helpers/getValues';
+// import { schema } from '../../utils/schemas/budget.schema';
+// import { store } from '../../store/index';
 import SimpleDatePicker from '~/components/SimpleDatePicker';
 
 import { Container, Input, TextArea, InputArea } from './styles';
+
 import DropdownMenu from '../DropdownMenu';
 
-export default function BudgetFields({ hidden }) {
-  const { register, methods } = useFormContext();
+export default function BudgetFields() {
+  const { register, methods, errors, setValue } = useFormContext();
+
+  /*
+  function getValues() {
+    const data = store.getState().budgets.budget;
+
+    const values = [];
+    Object.keys(data).forEach(k => {
+      const o = {};
+      o[k] = data[k];
+      test.push(o);
+    });
+
+    return values;
+  }
+  */
+
+  useEffect(() => {
+    setValue(getValues());
+  }, [setValue]);
+
   return (
-    <Container hidden={hidden} {...methods}>
+    <Container {...methods}>
       <InputArea>
         <Input
           ref={register}
@@ -22,6 +45,11 @@ export default function BudgetFields({ hidden }) {
           name="username"
           placeholder="Seu nome"
         />
+        {errors.username && (
+          <p className="yup-warn">
+            <MdError />
+          </p>
+        )}
         <Input
           ref={register}
           shk={0}
@@ -30,6 +58,11 @@ export default function BudgetFields({ hidden }) {
           name="surname"
           placeholder="Seu sobrenome"
         />
+        {errors.surname && (
+          <p className="yup-warn">
+            <MdError />
+          </p>
+        )}
         <Input
           ref={register}
           shk={0}
@@ -38,6 +71,11 @@ export default function BudgetFields({ hidden }) {
           name="email"
           placeholder="Seu email"
         />
+        {errors.email && (
+          <p className="yup-warn">
+            <MdError />
+          </p>
+        )}
         <Input
           ref={register}
           shk={0}
@@ -45,6 +83,11 @@ export default function BudgetFields({ hidden }) {
           placeholder="Seu telefone"
           name="phoneNumber"
         />
+        {errors.phoneNumber && (
+          <p className="yup-warn">
+            <MdError />
+          </p>
+        )}
       </InputArea>
       <TextArea>
         <textarea
@@ -56,6 +99,11 @@ export default function BudgetFields({ hidden }) {
           placeholder=" Descreva aqui seu desejo..."
         />
       </TextArea>
+      {errors.description && (
+        <p className="yup-warn">
+          <MdError />
+        </p>
+      )}
       <InputArea>
         <Controller
           as={<DropdownMenu />}
@@ -63,7 +111,7 @@ export default function BudgetFields({ hidden }) {
           onChange={selected => {
             return selected;
           }}
-          defaultValue=""
+          defaultValue={getValues('budgets', 'budget').category}
           className="dropdown"
           width={150}
           shk={1}
@@ -76,6 +124,11 @@ export default function BudgetFields({ hidden }) {
             'Rebaixamento de Gesso',
           ]}
         />
+        {errors.category && (
+          <p className="yup-warn">
+            <MdError />
+          </p>
+        )}
         <Controller
           name="date"
           as={<SimpleDatePicker />}
@@ -88,19 +141,12 @@ export default function BudgetFields({ hidden }) {
           grow={0}
           placeholderText="Para quando você quer?"
         />
+        {errors.date && (
+          <p className="yup-warn">
+            <MdError />
+          </p>
+        )}
       </InputArea>
     </Container>
   );
 }
-
-BudgetFields.propTypes = {
-  hidden: PropTypes.bool,
-  setDate: PropTypes.func,
-  date: PropTypes.any,
-};
-
-BudgetFields.defaultProps = {
-  hidden: true,
-  setDate: null,
-  date: {},
-};

@@ -2,17 +2,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { useDispatch } from 'react-redux';
-import { setPageModeRequest } from '~/store/modules/page/actions';
+// import { setPageModeRequest } from '~/store/modules/page/actions';
 
 import { Container, StyledNavLink } from './styles';
 
 export default function Menu({ logged }) {
-  const dispatch = useDispatch();
-
-  function handleClick() {
-    dispatch(setPageModeRequest(true));
-  }
+  // function handleClick() {
+  // dispatch(setPageModeRequest(true));
+  // }
   return (
     <Container>
       <StyledNavLink to="/">Home</StyledNavLink>
@@ -22,9 +19,7 @@ export default function Menu({ logged }) {
           Dashboard
         </StyledNavLink>
       ) : null}
-      <StyledNavLink onClick={handleClick} to="/signup">
-        Cadastre-se
-      </StyledNavLink>
+      <StyledNavLink to="/signup">Cadastre-se</StyledNavLink>
       <StyledNavLink to="/contact">Contato</StyledNavLink>
       <StyledNavLink to="/curriculum">Trabalhe conosco</StyledNavLink>
     </Container>

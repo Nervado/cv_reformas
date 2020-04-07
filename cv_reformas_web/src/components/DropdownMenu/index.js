@@ -36,6 +36,7 @@ export default function DropdownMenu({
               <StyledButton
                 type="StyledButton"
                 onClick={() => {
+                  // e.preventDefault();
                   setSelected(item);
                   setVisible(false);
                   onChange(item);
