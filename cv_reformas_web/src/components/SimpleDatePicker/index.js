@@ -21,8 +21,9 @@ import {
   isSameDay,
   format,
 } from 'date-fns';
-
 import pt from 'date-fns/locale/pt';
+
+import { weekDays, months } from '../../utils/helpers/calendarConstants';
 
 import {
   Container,
@@ -34,28 +35,17 @@ import {
   HeaderBody,
 } from './styles';
 
-export default function SimpleDatePicker({ placeholderText, onChange }) {
+export default function SimpleDatePicker({
+  defaultValues,
+  placeholderText,
+  onChange,
+}) {
   const [visible, setVisible] = useState(false);
   const [date, setNewDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [daysrange, setDaysrange] = useState([]);
 
   const today = new Date();
-  const weekDays = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom'];
-  const months = [
-    'Janeiro',
-    'Fev',
-    'Março',
-    'Abril',
-    'Maio',
-    'Junho',
-    'Julho',
-    'Agosto',
-    'Setembro',
-    'Outubro',
-    'Novembro',
-    'Dezembro',
-  ];
 
   function handlePrevMounth() {
     setNewDate(subMonths(date, 1));
@@ -65,10 +55,11 @@ export default function SimpleDatePicker({ placeholderText, onChange }) {
     setNewDate(addMonths(date, 1));
   }
 
-  const dateFormatted = useMemo(
-    () => format(selectedDate, "d 'de' MMMM 'de' yyyy", { locale: pt }),
-    [selectedDate],
-  );
+  const dateFormatted = useMemo(() => {
+    return format(selectedDate, "d 'de' MMMM 'de' yyyy", {
+      locale: pt,
+    });
+  }, [selectedDate]);
 
   useEffect(() => {
     let index = 0;
@@ -107,11 +98,19 @@ export default function SimpleDatePicker({ placeholderText, onChange }) {
       <Header>
         <Title
           onClick={() => setVisible(!visible)}
-          selected={selectedDate > today ? 1 : 0}
+          selected={defaultValues || selectedDate > today ? 1 : 0}
         >
-          <span>{selectedDate > today ? dateFormatted : placeholderText}</span>
+          <span>
+            {selectedDate > today
+              ? dateFormatted
+              : defaultValues || placeholderText}
+          </span>
           <span style={{ color: '#df7e38' }}>
-            {selectedDate > today ? <FaRegCalendarCheck /> : <FaRegCalendar />}
+            {defaultValues || selectedDate > today ? (
+              <FaRegCalendarCheck />
+            ) : (
+              <FaRegCalendar />
+            )}
           </span>
         </Title>
       </Header>
@@ -181,9 +180,11 @@ export default function SimpleDatePicker({ placeholderText, onChange }) {
 SimpleDatePicker.propTypes = {
   placeholderText: PropTypes.string,
   onChange: PropTypes.func,
+  defaultValues: PropTypes.string,
 };
 
 SimpleDatePicker.defaultProps = {
   placeholderText: '',
   onChange: null,
+  defaultValues: '',
 };

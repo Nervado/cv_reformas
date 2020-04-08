@@ -18,7 +18,7 @@ export default function BudgetFields() {
   const { reset, errors, register, setValue } = useFormContext();
 
   useEffect(() => {
-    setValue(getValues());
+    setValue(getValues('budgets', 'budget'));
   }, [setValue]);
 
   useEffect(() => {
@@ -177,7 +177,7 @@ export default function BudgetFields() {
           shk={0}
           grow={0}
           width="50px"
-          name="hight"
+          name="height"
           placeholder="Altura"
         />
 

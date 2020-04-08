@@ -1,39 +1,26 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MdError } from 'react-icons/md';
 import { useFormContext, Controller } from 'react-hook-form';
-// import { store } from '../../store/index';
 
-import { getValues } from '../../utils/helpers/getValues';
-// import { schema } from '../../utils/schemas/budget.schema';
-// import { store } from '../../store/index';
+import { getValues, getValue } from '../../utils/helpers/getValues';
+import { prettyDate } from '../../utils/helpers/friendlyBrDate';
 import SimpleDatePicker from '~/components/SimpleDatePicker';
+import DropdownMenu from '../DropdownMenu';
 
 import { Container, Input, TextArea, InputArea } from './styles';
-
-import DropdownMenu from '../DropdownMenu';
 
 export default function BudgetFields() {
   const { register, methods, errors, setValue } = useFormContext();
 
-  /*
-  function getValues() {
-    const data = store.getState().budgets.budget;
-
-    const values = [];
-    Object.keys(data).forEach(k => {
-      const o = {};
-      o[k] = data[k];
-      test.push(o);
-    });
-
-    return values;
-  }
-  */
+  const [dateFormated, setDateFormated] = useState();
 
   useEffect(() => {
-    setValue(getValues());
-  }, [setValue]);
+    const data = getValues('budgets', 'budget');
+
+    setValue(data);
+    setDateFormated(prettyDate(getValue('budgets', 'budget', 'date').date[0]));
+  }, [setValue, dateFormated]);
 
   return (
     <Container {...methods}>
@@ -106,12 +93,17 @@ export default function BudgetFields() {
       )}
       <InputArea>
         <Controller
-          as={<DropdownMenu />}
+          as={
+            <DropdownMenu
+              defaultValue={
+                getValue('budgets', 'budget', 'category').category[0] || ''
+              }
+            />
+          }
           name="category"
           onChange={selected => {
             return selected;
           }}
-          defaultValue={getValues('budgets', 'budget').category}
           className="dropdown"
           width={150}
           shk={1}
@@ -131,11 +123,10 @@ export default function BudgetFields() {
         )}
         <Controller
           name="date"
-          as={<SimpleDatePicker />}
+          as={<SimpleDatePicker defaultValues={dateFormated} />}
           onChange={date => {
             return date;
           }}
-          defaultValue=""
           width={150}
           shk={1}
           grow={0}

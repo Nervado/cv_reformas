@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
 
-import ReactGA from 'react-ga';
+// import ReactGA from 'react-ga';
 // import { useSelector } from 'react-redux';
 
 // Import Layouts
@@ -24,6 +24,8 @@ export default function RouterWrapper({
 
   // GA
 
+  /**
+
   const trackingId = 'G-CB4KQ4MS85'; // Replace with your Google Analytics tracking ID
 
   ReactGA.initialize(trackingId);
@@ -33,7 +35,7 @@ export default function RouterWrapper({
     // any data that is relevant to the user session
     // that you would like to track with google analytics
   });
-
+*/
   return (
     <Route
       {...rest}

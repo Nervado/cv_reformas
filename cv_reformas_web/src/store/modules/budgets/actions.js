@@ -15,7 +15,6 @@ export function budgetRequest(budget) {
 export function newBudgetRequestSuccess() {
   return {
     type: '@budgets/NEW_BUDGET_REQUEST_SUCCESS',
-    payload: {},
   };
 }
 

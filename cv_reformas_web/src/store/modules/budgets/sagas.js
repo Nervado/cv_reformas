@@ -1,5 +1,6 @@
 import { takeLatest, call, put, all } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
+
 import history from '~/services/history';
 import api from '~/services/api';
 
@@ -25,7 +26,7 @@ export function* budgetPostRequest({ payload }) {
     category,
     numberOfFloors,
     numberOfRooms,
-    hight,
+    height,
     width,
     deepness,
     numberOflights,
@@ -52,11 +53,11 @@ export function* budgetPostRequest({ payload }) {
         fu,
       },
       description,
-      desirableTime: date[0],
-      category: category[0],
+      desirableTime: date && date[0],
+      category: category && category[0],
       numberOfFloors: parseInt(numberOfFloors, 10),
       numberOfRooms: parseInt(numberOfRooms, 10),
-      hight: parseInt(hight, 10),
+      height: parseInt(height, 10),
       width: parseInt(width, 10),
       deepness: parseInt(deepness, 10),
       numberOflights: parseInt(numberOflights, 10),
@@ -78,7 +79,7 @@ export function* budgetPostRequest({ payload }) {
       toast.error('Falha no envio, verifique os campos!');
     }
 
-    yield put(newBudgetRequestFailure());
+    yield put(newBudgetRequestFailure(payload));
   }
 }
 

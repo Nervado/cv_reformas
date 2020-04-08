@@ -17,6 +17,10 @@ export const Container = styled.div`
   vertical-align: center;
 
   overflow-wrap: wrap;
+
+  &.has-errors {
+    box-shadow: 2px 2px 3px 1px #bc3a3a;
+  }
 `;
 
 export const Header = styled.div`
@@ -29,6 +33,8 @@ export const Header = styled.div`
 `;
 
 export const Title = styled.div`
+  font-family: Helvetica, sans-serif;
+
   opacity: ${props => (props.selected.length ? 1 : 0.8)};
   color: ${props => (props.selected.length ? '#000000' : '#707070')};
 
@@ -45,6 +51,7 @@ export const Title = styled.div`
 `;
 
 export const List = styled.ul`
+  font-family: Helvetica, sans-serif;
   position: absolute;
   z-index: 10;
 
@@ -58,16 +65,16 @@ export const List = styled.ul`
     display: flex;
     align-content: right;
     width: 100%;
-    background-color: green;
     position: relative;
   }
 
   button {
     text-align: center;
-
     font-family: Helvetica, sans-serif;
     color: #707070;
+    font-weight: bold;
     &:hover {
+      font-weight: bold;
       color: #df7e38;
     }
   }

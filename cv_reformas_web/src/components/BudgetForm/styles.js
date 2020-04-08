@@ -19,7 +19,7 @@ export const Container = styled.form`
   border-radius: 4px;
 
   .yup-warn {
-    color: red;
+    color: #df7e38;
     display: block;
   }
 `;

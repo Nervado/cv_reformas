@@ -10,6 +10,13 @@ export const Container = styled.form`
   justify-content: space-between;
   padding: 0 15px 0 15px;
 
+  .success {
+    font-family: Helvetica, sans-serif;
+
+    background-color: #df7e38;
+    box-shadow: 2px 2px 3px 1px #df7e38;
+  }
+
   .custom-input {
     height: 50px;
 
@@ -37,6 +44,12 @@ export const InputArea = styled.div`
   align-items: center;
   justify-content: flex-start;
   flex-wrap: wrap;
+
+  .yup-warn {
+    position: absolute;
+    color: #df7e38;
+    display: inline-block;
+  }
 `;
 
 export const Input = styled.input.attrs(props => ({
@@ -67,6 +80,10 @@ export const Input = styled.input.attrs(props => ({
   &::placeholder {
     opacity: 0.8;
     color: #707070;
+  }
+
+  &.has-errors {
+    box-shadow: 2px 2px 3px 1px red;
   }
 `;
 
@@ -109,6 +126,10 @@ export const TextArea = styled.div`
     &::text {
       opacity: 0.8;
       color: #707070;
+    }
+
+    &.has-errors {
+      box-shadow: 2px 2px 3px 1px red;
     }
   }
 `;

@@ -22,8 +22,11 @@ export default function DropdownMenu({
   return (
     <Container>
       <Header>
-        <Title onClick={() => setVisible(!visible)} selected={selected}>
-          <span>{selected || placeholder}</span>
+        <Title
+          onClick={() => setVisible(!visible)}
+          selected={defaultValue || selected}
+        >
+          <span>{selected || defaultValue || placeholder}</span>
           <span style={{ color: '#df7e38' }}>
             {visible ? <FaAngleUp /> : <FaAngleDown />}
           </span>
@@ -36,7 +39,6 @@ export default function DropdownMenu({
               <StyledButton
                 type="StyledButton"
                 onClick={() => {
-                  // e.preventDefault();
                   setSelected(item);
                   setVisible(false);
                   onChange(item);

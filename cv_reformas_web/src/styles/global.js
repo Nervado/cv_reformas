@@ -63,4 +63,13 @@ body::after {
   }
 
 
+  .success {
+    font-family: Helvetica, sans-serif;
+    color: #fff;
+
+    background-color: #df7e38;
+    box-shadow: 2px 2px 3px 1px #df7e38;
+  }
+
+
 `;
