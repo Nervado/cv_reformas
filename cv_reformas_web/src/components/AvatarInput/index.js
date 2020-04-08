@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaCameraRetro, FaTrash } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 
 import api from '~/services/api';
 
@@ -12,14 +13,21 @@ export default function AvatarInput() {
     raw: '',
   });
 
-  async function handleUpload() {
+  const [file, setFile] = useState(null);
+
+  async function handleUpload(e) {
     const data = new FormData();
-
-    data.append('image', image.raw);
-
-    const config = { headers: { 'content-type': 'multipart/form-data' } };
-
-    await api.post('avatars', data, config);
+    data.append('avatar', e.target.files[0]);
+    try {
+      const response = await api.post('avatars', data);
+      toast.info('Avatar atualizado', { className: 'success' });
+      setFile(response.data);
+    } catch (error) {
+      setImage({ preview: '', raw: '' });
+      toast.error(
+        'A sua foto deve ter no máximo 2 MB e ser do tipo .jpg, .jpeg, .png, ou .gif!',
+      );
+    }
   }
 
   const handleChange = e => {
@@ -28,11 +36,20 @@ export default function AvatarInput() {
       raw: e.target.files[0],
     });
 
-    handleUpload();
+    handleUpload(e);
   };
 
-  function handleClick() {
+  async function handleClick() {
     setImage({ preview: '', raw: '' });
+    if (!file) return;
+    try {
+      await api.delete(`avatars/${file.avatarId}`);
+      setFile(null);
+
+      toast.warn('Foto deletada');
+    } catch (error) {
+      toast.error('Falha ao deletar foto');
+    }
   }
 
   return (
@@ -55,6 +72,7 @@ export default function AvatarInput() {
           type="file"
           id="avatar"
           onChange={handleChange}
+          value=""
         />
       </label>
       <FaTrash
